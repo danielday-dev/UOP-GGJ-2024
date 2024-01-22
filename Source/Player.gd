@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+@export var SPEED: float = 300.0;
 @export var momentumDampening :float = 40;
 
 
