@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://w0vu14krjed8"]
+[gd_scene load_steps=6 format=3 uid="uid://w0vu14krjed8"]
 
 [ext_resource type="Script" path="res://Source/Player.gd" id="1_5tybj"]
-[ext_resource type="Texture2D" uid="uid://bt6u3q54udja6" path="res://Resources/DefaultTexture.png" id="2_fxc77"]
+[ext_resource type="Texture2D" uid="uid://dcbfl12e1436o" path="res://Resources/Player/Player_Temp.png" id="2_e2lat"]
+[ext_resource type="Material" uid="uid://cwsdio01qvcmn" path="res://Resources/Player/Player_Shader.tres" id="2_se5sf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l2o41"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_fxc77")
+"texture": ExtResource("2_e2lat")
 }],
 "loop": true,
 "name": &"default",
@@ -15,13 +16,18 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65r7v"]
+radius = 14.0
+height = 34.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_5tybj")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = ExtResource("2_se5sf")
+position = Vector2(1, -29)
+scale = Vector2(0.16, 0.16)
 sprite_frames = SubResource("SpriteFrames_l2o41")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collider_Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_65r7v")
