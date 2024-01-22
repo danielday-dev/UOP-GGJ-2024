@@ -11,12 +11,14 @@ config_version=5
 [application]
 
 config/name="UOP-GGJ-2024"
+run/main_scene="res://Scenes/Stage1.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/stretch/mode="viewport"
 
 [input]
 
