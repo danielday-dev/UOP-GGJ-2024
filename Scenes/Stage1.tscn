@@ -1,21 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://dinv8peksev2j"]
+[gd_scene load_steps=8 format=3 uid="uid://dinv8peksev2j"]
 
 [ext_resource type="PackedScene" uid="uid://w0vu14krjed8" path="res://Prefabs/Player.tscn" id="1_qlw6n"]
 [ext_resource type="Script" path="res://Source/Stage1.gd" id="1_rrbid"]
+[ext_resource type="Script" path="res://Source/Camera.gd" id="3_lx5w6"]
 [ext_resource type="Texture2D" uid="uid://670hufup76d2" path="res://Resources/Streetgame game screen.png" id="3_phe7c"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p385"]
 distance = -0.999969
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p7ab0"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hww6s"]
+size = Vector2(68, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81e8r"]
+size = Vector2(68, 150)
 
 [node name="Stage1" type="Node2D"]
 script = ExtResource("1_rrbid")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("1_qlw6n")]
-position = Vector2(-162, 102)
 
 [node name="Environment" type="StaticBody2D" parent="."]
 
@@ -32,5 +32,46 @@ shape = SubResource("WorldBoundaryShape2D_1p385")
 position = Vector2(1.19209e-07, 178)
 shape = SubResource("WorldBoundaryShape2D_1p385")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_p7ab0")
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_lx5w6")
+
+[node name="GIANTORANGEARROW" type="Polygon2D" parent="Camera2D"]
+position = Vector2(262, -60)
+color = Color(1, 0.498039, 0.152941, 1)
+polygon = PackedVector2Array(1, 0, -1, -24, -67, -25, -67, -85, 5, -84, 6, -102, 50, -29)
+
+[node name="ArrowTimer" type="Timer" parent="Camera2D/GIANTORANGEARROW"]
+autostart = true
+
+[node name="RightBorder" type="Area2D" parent="Camera2D"]
+position = Vector2(-572, 209)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RightBorder"]
+position = Vector2(858, -104)
+shape = SubResource("RectangleShape2D_hww6s")
+
+[node name="Boundary4" type="CollisionShape2D" parent="Camera2D/RightBorder"]
+position = Vector2(892, -96)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_1p385")
+
+[node name="LeftBorder" type="Area2D" parent="Camera2D"]
+position = Vector2(-286, 104.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/LeftBorder"]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_81e8r")
+
+[node name="Boundary3" type="CollisionShape2D" parent="Camera2D/LeftBorder"]
+position = Vector2(-36, -4.5)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_1p385")
+
+[node name="Player" parent="." instance=ExtResource("1_qlw6n")]
+position = Vector2(-162, 102)
+
+[connection signal="timeout" from="Camera2D/GIANTORANGEARROW/ArrowTimer" to="Camera2D" method="_on_arrow_timer_timeout"]
+[connection signal="body_entered" from="Camera2D/RightBorder" to="Camera2D" method="_on_right_border_body_entered"]
+[connection signal="body_exited" from="Camera2D/RightBorder" to="Camera2D" method="_on_right_border_body_exited"]
+[connection signal="body_entered" from="Camera2D/LeftBorder" to="Camera2D" method="_on_left_border_body_entered"]
+[connection signal="body_exited" from="Camera2D/LeftBorder" to="Camera2D" method="_on_left_border_body_exited"]
