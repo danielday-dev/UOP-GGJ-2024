@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dinv8peksev2j"]
+[gd_scene load_steps=9 format=3 uid="uid://dinv8peksev2j"]
 
 [ext_resource type="PackedScene" uid="uid://w0vu14krjed8" path="res://Prefabs/Player.tscn" id="1_qlw6n"]
 [ext_resource type="Script" path="res://Source/Stage1.gd" id="1_rrbid"]
 [ext_resource type="Script" path="res://Source/Camera.gd" id="3_lx5w6"]
 [ext_resource type="Texture2D" uid="uid://670hufup76d2" path="res://Resources/Streetgame game screen.png" id="3_phe7c"]
+[ext_resource type="PackedScene" uid="uid://c061nideiavcb" path="res://Prefabs/Slime.tscn" id="5_6vdjg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p385"]
 distance = -0.999969
@@ -73,6 +74,9 @@ position = Vector2(-162, 102)
 [node name="mobs" type="Node2D" parent="."]
 
 [node name="mobSpawnTimer" type="Timer" parent="mobs"]
+
+[node name="Slime" parent="mobs" instance=ExtResource("5_6vdjg")]
+position = Vector2(65, 97)
 
 [connection signal="timeout" from="Camera/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
 [connection signal="body_entered" from="Camera/RightBorder" to="Camera" method="_on_right_border_body_entered"]

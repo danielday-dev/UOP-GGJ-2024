@@ -7,7 +7,7 @@ class_name AttackInfo
 @export var animation : StringName = ""
 @export var priority : float = 0
 @export var damage : float = 0
-@export var hurtboxName : StringName = ""
+@export var hurtboxName : NodePath = ""
 @export var nextState : EnemyState = EnemyState.Grounded
 
 enum EnemyState{

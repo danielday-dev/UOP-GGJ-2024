@@ -17,7 +17,7 @@ enum EnemyState{
 }
 var enemyState : EnemyState = EnemyState.Grounded
 
-var attackInd: int = 0
+var activeAttack: AttackInfo;
 
 var player : CharacterBody2D
 
@@ -47,25 +47,18 @@ func _physics_process(delta):
 				for attack in Attacks:
 					if distanceFromPlayer <= attack.range:
 						enemyState = EnemyState.Attacking
+						activeAttack = attack;						
 						break
 		EnemyState.Airborne:
 			pass
 		EnemyState.Attacking:
-			match attackType:
-				AttackType.Light:
-					moveMultiplier = 0.5
-					$LightFeatherHurtbox.monitorable = true
-					setAnimation("lightAttack")
-					
-				AttackType.Heavy:
-					moveMultiplier = 0.3
-					$HeavyFeatherHurtbox.monitorable = true
-					setAnimation("heavyAttack")
-					
+			(get_node(activeAttack.hurtboxName) as Area2D).monitorable = true;
+			moveMultiplier = activeAttack.speedMulitplier;
+			setAnimation(activeAttack.animation)
+			
 			if animationEnded():
-				enemyState = EnemyState.Grounded
-				$LightFeatherHurtbox.monitorable = false
-				#$HeavyFeatherHurtbox.monitorable = false
+				enemyState = activeAttack.nextState as EnemyState;
+				(get_node(activeAttack.hurtboxName) as Area2D).monitorable = false
 				
 		EnemyState.Stunned:
 			pass
