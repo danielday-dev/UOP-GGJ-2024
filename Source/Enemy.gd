@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
-
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@export var SPEED:float = 300
+@export var SPEED:float = 50
 @export var momentumDampening:float = 40
 @export var Attacks : Array[AttackInfo]
+var minimumDistanceFromPlayer = 80
 
 enum EnemyState{
 	Grounded,
@@ -22,16 +22,21 @@ var activeAttack: AttackInfo;
 var player : CharacterBody2D
 
 func _ready():
-	player = get_node("/root/Player")
-	#player = get_tree().root.find_child("Player")
+	player = $/root/Main/Player
 
 func _physics_process(delta):
-	var distanceFromPlayer = position.distance_to(player.position)
-	var movement : Vector2 = position.direction_to(player.position)
+	var movement : Vector2
+	
+	var distanceFromPlayer = position.distance_to(player.get_position())
+	
+	if minimumDistanceFromPlayer <= distanceFromPlayer:
+		movement = position.direction_to(player.position)
+	else:
+		movement = Vector2.ZERO
 	var moveMultiplier = 0
 	
 	# enemy attacks player when in range of attack
-	var jump :bool = true #########
+	var jump :bool = false #########
 	match enemyState:
 		EnemyState.Grounded:
 			moveMultiplier = 1
@@ -47,7 +52,7 @@ func _physics_process(delta):
 				for attack in Attacks:
 					if distanceFromPlayer <= attack.range:
 						enemyState = EnemyState.Attacking
-						activeAttack = attack;						
+						activeAttack = attack;
 						break
 		EnemyState.Airborne:
 			pass

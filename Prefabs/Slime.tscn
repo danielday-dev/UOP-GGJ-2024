@@ -1,9 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://c061nideiavcb"]
+[gd_scene load_steps=11 format=3 uid="uid://ookmlec53d3y"]
 
 [ext_resource type="Script" path="res://Source/Enemy.gd" id="1_wqrsb"]
+[ext_resource type="Script" path="res://Resources/AttackInfo.gd" id="2_vai6y"]
 [ext_resource type="Texture2D" uid="uid://lpsuac0lcc51" path="res://Resources/Slime/Slime_Idle.png" id="3_be4le"]
 [ext_resource type="Texture2D" uid="uid://7lbsruaor7j3" path="res://Resources/Slime/Slime_Yum1.png" id="3_or8od"]
 [ext_resource type="Texture2D" uid="uid://dbx05upx2h3l5" path="res://Resources/Slime/Slime_Yum2.png" id="4_jm00p"]
+
+[sub_resource type="Resource" id="Resource_w87vo"]
+script = ExtResource("2_vai6y")
+range = 100.0
+speedMulitplier = 0.2
+animation = &"yom"
+priority = 0.0
+damage = 1.0
+hurtboxName = NodePath("Yom")
+nextState = 0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_76u1f"]
 animations = [{
@@ -24,10 +35,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_or8od")
-}, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": ExtResource("3_or8od")
 }, {
 "duration": 1.0,
@@ -50,6 +58,7 @@ size = Vector2(53, 20)
 
 [node name="Slime" type="CharacterBody2D"]
 script = ExtResource("1_wqrsb")
+Attacks = Array[ExtResource("2_vai6y")]([SubResource("Resource_w87vo")])
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

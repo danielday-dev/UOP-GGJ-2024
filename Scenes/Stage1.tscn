@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Source/Stage1.gd" id="1_rrbid"]
 [ext_resource type="Script" path="res://Source/Camera.gd" id="3_lx5w6"]
 [ext_resource type="Texture2D" uid="uid://670hufup76d2" path="res://Resources/Streetgame game screen.png" id="3_phe7c"]
-[ext_resource type="PackedScene" uid="uid://c061nideiavcb" path="res://Prefabs/Slime.tscn" id="5_6vdjg"]
+[ext_resource type="PackedScene" uid="uid://ookmlec53d3y" path="res://Prefabs/Slime.tscn" id="5_6vdjg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p385"]
 distance = -0.999969
@@ -15,8 +15,11 @@ size = Vector2(68, 150)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_81e8r"]
 size = Vector2(68, 150)
 
-[node name="Stage1" type="Node2D"]
+[node name="Main" type="Node2D"]
 script = ExtResource("1_rrbid")
+
+[node name="Player" parent="." instance=ExtResource("1_qlw6n")]
+position = Vector2(-162, 102)
 
 [node name="Environment" type="StaticBody2D" parent="."]
 
@@ -46,6 +49,8 @@ autostart = true
 
 [node name="RightBorder" type="Area2D" parent="Camera"]
 position = Vector2(-572, 209)
+collision_layer = 8388608
+collision_mask = 8388608
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/RightBorder"]
 position = Vector2(858, -104)
@@ -58,6 +63,8 @@ shape = SubResource("WorldBoundaryShape2D_1p385")
 
 [node name="LeftBorder" type="Area2D" parent="Camera"]
 position = Vector2(-286, 104.5)
+collision_layer = 8388608
+collision_mask = 8388608
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/LeftBorder"]
 position = Vector2(1, 0.5)
@@ -68,15 +75,13 @@ position = Vector2(-36, -4.5)
 rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_1p385")
 
-[node name="Player" parent="." instance=ExtResource("1_qlw6n")]
-position = Vector2(-162, 102)
-
 [node name="mobs" type="Node2D" parent="."]
 
 [node name="mobSpawnTimer" type="Timer" parent="mobs"]
 
 [node name="Slime" parent="mobs" instance=ExtResource("5_6vdjg")]
 position = Vector2(65, 97)
+collision_layer = 0
 
 [connection signal="timeout" from="Camera/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
 [connection signal="body_entered" from="Camera/RightBorder" to="Camera" method="_on_right_border_body_entered"]

@@ -67,6 +67,10 @@ jump={
 "events": []
 }
 
+[layer_names]
+
+2d_physics/layer_24="camera"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
