@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://c061nideiavcb"]
+
+[ext_resource type="Script" path="res://Source/Enemy.gd" id="1_wqrsb"]
+[ext_resource type="Texture2D" uid="uid://lpsuac0lcc51" path="res://Resources/Slime/Slime_Idle.png" id="3_be4le"]
+[ext_resource type="Texture2D" uid="uid://7lbsruaor7j3" path="res://Resources/Slime/Slime_Yum1.png" id="3_or8od"]
+[ext_resource type="Texture2D" uid="uid://dbx05upx2h3l5" path="res://Resources/Slime/Slime_Yum2.png" id="4_jm00p"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_76u1f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_be4le")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_be4le")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_or8od")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_or8od")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jm00p")
+}],
+"loop": false,
+"name": &"yom",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xnljt"]
+radius = 14.0
+height = 34.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8yvex"]
+size = Vector2(24, 32.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dv6ud"]
+size = Vector2(53, 20)
+
+[node name="Slime" type="CharacterBody2D"]
+script = ExtResource("1_wqrsb")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-15, -16)
+scale = Vector2(0.203324, 0.203324)
+sprite_frames = SubResource("SpriteFrames_76u1f")
+animation = &"moving"
+
+[node name="Collider_Body" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_xnljt")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="HitboxCollider" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 0.625)
+shape = SubResource("RectangleShape2D_8yvex")
+
+[node name="Yom" type="Area2D" parent="."]
+monitorable = false
+
+[node name="HurtboxCollider" type="CollisionShape2D" parent="Yom"]
+position = Vector2(-30, -1)
+shape = SubResource("RectangleShape2D_dv6ud")
