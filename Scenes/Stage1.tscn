@@ -32,37 +32,37 @@ shape = SubResource("WorldBoundaryShape2D_1p385")
 position = Vector2(1.19209e-07, 178)
 shape = SubResource("WorldBoundaryShape2D_1p385")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("3_lx5w6")
 
-[node name="GIANTORANGEARROW" type="Polygon2D" parent="Camera2D"]
+[node name="GIANTORANGEARROW" type="Polygon2D" parent="Camera"]
 position = Vector2(262, -60)
 color = Color(1, 0.498039, 0.152941, 1)
 polygon = PackedVector2Array(1, 0, -1, -24, -67, -25, -67, -85, 5, -84, 6, -102, 50, -29)
 
-[node name="ArrowTimer" type="Timer" parent="Camera2D/GIANTORANGEARROW"]
+[node name="ArrowTimer" type="Timer" parent="Camera/GIANTORANGEARROW"]
 autostart = true
 
-[node name="RightBorder" type="Area2D" parent="Camera2D"]
+[node name="RightBorder" type="Area2D" parent="Camera"]
 position = Vector2(-572, 209)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RightBorder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/RightBorder"]
 position = Vector2(858, -104)
 shape = SubResource("RectangleShape2D_hww6s")
 
-[node name="Boundary4" type="CollisionShape2D" parent="Camera2D/RightBorder"]
+[node name="Boundary4" type="CollisionShape2D" parent="Camera/RightBorder"]
 position = Vector2(892, -96)
 rotation = -1.5708
 shape = SubResource("WorldBoundaryShape2D_1p385")
 
-[node name="LeftBorder" type="Area2D" parent="Camera2D"]
+[node name="LeftBorder" type="Area2D" parent="Camera"]
 position = Vector2(-286, 104.5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/LeftBorder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/LeftBorder"]
 position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_81e8r")
 
-[node name="Boundary3" type="CollisionShape2D" parent="Camera2D/LeftBorder"]
+[node name="Boundary3" type="CollisionShape2D" parent="Camera/LeftBorder"]
 position = Vector2(-36, -4.5)
 rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_1p385")
@@ -70,8 +70,12 @@ shape = SubResource("WorldBoundaryShape2D_1p385")
 [node name="Player" parent="." instance=ExtResource("1_qlw6n")]
 position = Vector2(-162, 102)
 
-[connection signal="timeout" from="Camera2D/GIANTORANGEARROW/ArrowTimer" to="Camera2D" method="_on_arrow_timer_timeout"]
-[connection signal="body_entered" from="Camera2D/RightBorder" to="Camera2D" method="_on_right_border_body_entered"]
-[connection signal="body_exited" from="Camera2D/RightBorder" to="Camera2D" method="_on_right_border_body_exited"]
-[connection signal="body_entered" from="Camera2D/LeftBorder" to="Camera2D" method="_on_left_border_body_entered"]
-[connection signal="body_exited" from="Camera2D/LeftBorder" to="Camera2D" method="_on_left_border_body_exited"]
+[node name="mobs" type="Node2D" parent="."]
+
+[node name="mobSpawnTimer" type="Timer" parent="mobs"]
+
+[connection signal="timeout" from="Camera/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
+[connection signal="body_entered" from="Camera/RightBorder" to="Camera" method="_on_right_border_body_entered"]
+[connection signal="body_exited" from="Camera/RightBorder" to="Camera" method="_on_right_border_body_exited"]
+[connection signal="body_entered" from="Camera/LeftBorder" to="Camera" method="_on_left_border_body_entered"]
+[connection signal="body_exited" from="Camera/LeftBorder" to="Camera" method="_on_left_border_body_exited"]
