@@ -51,14 +51,14 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65r7v"]
-radius = 14.0
-height = 34.0
+radius = 18.0
+height = 38.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_04agm"]
 size = Vector2(24, 32.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5oplk"]
-size = Vector2(53, 20)
+size = Vector2(118, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8fcfc"]
 size = Vector2(59, 33)
@@ -70,10 +70,10 @@ script = ExtResource("1_5tybj")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(47, -34)
-scale = Vector2(0.203324, 0.203324)
+position = Vector2(59, -42)
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_l2o41")
-animation = &"moving"
+animation = &"idle"
 
 [node name="Collider_Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_65r7v")
@@ -85,13 +85,15 @@ position = Vector2(0, 0.625)
 shape = SubResource("RectangleShape2D_04agm")
 
 [node name="LightFeatherHurtbox" type="Area2D" parent="."]
+visible = false
 monitorable = false
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="LightFeatherHurtbox"]
-position = Vector2(37.5, 2)
+position = Vector2(57, 1)
 shape = SubResource("RectangleShape2D_5oplk")
 
 [node name="HeavyFeatherHurtbox" type="Area2D" parent="."]
+visible = false
 monitorable = false
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="HeavyFeatherHurtbox"]
