@@ -253,6 +253,8 @@ animations = [{
 script = ExtResource("1_ut3g5")
 
 [node name="CucumberMaki" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
 position = Vector2(320, 180)
 sprite_frames = SubResource("SpriteFrames_08mym")
 animation = &"CucumberMaki"
