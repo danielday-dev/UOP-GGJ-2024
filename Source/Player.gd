@@ -3,6 +3,13 @@ extends CharacterBody2D
 
 @export var SPEED: float = 300.0;
 @export var momentumDampening :float = 40;
+@export_category("Combat Stats")
+@export var maxHealth: float = 100;
+var currentHealth :float = maxHealth;
+@export var lightDamage : float = 20;
+@export var heavyDamage : float = 40;
+@export var beansHeal : float = 50;
+@export var numBeans : int = 3;
 
 enum PlayerState{
 	Grounded,
@@ -90,6 +97,8 @@ func _physics_process(delta):
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, SPEED * delta * momentumDampening)
 		
+	changeDirection(movement)
+	
 	move_and_slide()
 
 func setAnimation(animation):
@@ -98,3 +107,13 @@ func setAnimation(animation):
 
 func animationEnded():
 	return $Sprite.frame_progress >= 1.0
+
+var isFlipped : bool = false
+func changeDirection(movement):
+	var direction = sign(movement.x)
+	var shouldBeFlipped :bool = direction == -1
+	
+	if direction and shouldBeFlipped != isFlipped:
+		scale.x = -1
+		isFlipped = shouldBeFlipped 
+	

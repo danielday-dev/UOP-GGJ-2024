@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dinv8peksev2j"]
+[gd_scene load_steps=10 format=3 uid="uid://dinv8peksev2j"]
 
 [ext_resource type="PackedScene" uid="uid://w0vu14krjed8" path="res://Prefabs/Player.tscn" id="1_qlw6n"]
 [ext_resource type="Script" path="res://Source/Stage1.gd" id="1_rrbid"]
 [ext_resource type="Script" path="res://Source/Camera.gd" id="3_lx5w6"]
 [ext_resource type="Texture2D" uid="uid://670hufup76d2" path="res://Resources/Streetgame game screen.png" id="3_phe7c"]
 [ext_resource type="PackedScene" uid="uid://ookmlec53d3y" path="res://Prefabs/Slime.tscn" id="5_6vdjg"]
+[ext_resource type="PackedScene" uid="uid://8h7fobbv051y" path="res://Prefabs/WaveBoundary.tscn" id="5_uywg0"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p385"]
 distance = -0.999969
@@ -75,12 +76,27 @@ position = Vector2(-36, -4.5)
 rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_1p385")
 
-[node name="mobs" type="Node2D" parent="."]
+[node name="WaveBoundary" parent="." instance=ExtResource("5_uywg0")]
+position = Vector2(-14, 6)
 
-[node name="mobSpawnTimer" type="Timer" parent="mobs"]
+[node name="Node2D" type="Node2D" parent="WaveBoundary"]
 
-[node name="Slime" parent="mobs" instance=ExtResource("5_6vdjg")]
-position = Vector2(65, 97)
+[node name="Slime" parent="WaveBoundary/Node2D" instance=ExtResource("5_6vdjg")]
+position = Vector2(464, 122)
+collision_layer = 0
+
+[node name="Slime2" parent="WaveBoundary/Node2D" instance=ExtResource("5_6vdjg")]
+position = Vector2(646, 129)
+collision_layer = 0
+
+[node name="Node2D2" type="Node2D" parent="WaveBoundary"]
+
+[node name="Slime" parent="WaveBoundary/Node2D2" instance=ExtResource("5_6vdjg")]
+position = Vector2(394, 67)
+collision_layer = 0
+
+[node name="Slime2" parent="WaveBoundary/Node2D2" instance=ExtResource("5_6vdjg")]
+position = Vector2(608, 79)
 collision_layer = 0
 
 [connection signal="timeout" from="Camera/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]

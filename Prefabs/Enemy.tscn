@@ -37,14 +37,14 @@ script = ExtResource("1_clj3o")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_peagi")
-animation = &"idle"
+animation = &"moving"
 
 [node name="Collider_Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_2ac44")
 
 [node name="EnemyHitbox" type="Area2D" parent="."]
-collision_layer = 256
-collision_mask = 256
+collision_layer = 128
+collision_mask = 0
 
 [node name="HitboxCollider" type="CollisionShape2D" parent="EnemyHitbox"]
 position = Vector2(0, 1)

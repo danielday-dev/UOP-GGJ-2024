@@ -6,8 +6,11 @@ extends CharacterBody2D
 @export var SPEED:float = 50
 @export var momentumDampening:float = 40
 @export var Attacks : Array[AttackInfo]
-var minimumDistanceFromPlayer = 80
+@export var minimumDistanceFromPlayer = 80
+@export_category("Combat Stats")
+@export var maxHealth: float = 100;
 
+var currentHealth :float = maxHealth;
 enum EnemyState{
 	Grounded,
 	Airborne,
@@ -27,13 +30,13 @@ func _ready():
 func _physics_process(delta):
 	var movement : Vector2
 	
-	var distanceFromPlayer = position.distance_to(player.get_position())
+	var distanceFromPlayer : float = ((position - player.position) * Vector2(1, 4)).length()
 	
 	if minimumDistanceFromPlayer <= distanceFromPlayer:
 		movement = position.direction_to(player.position)
 	else:
 		movement = Vector2.ZERO
-	var moveMultiplier = 0
+	var moveMultiplier : float = 0
 	
 	# enemy attacks player when in range of attack
 	var jump :bool = false #########
@@ -75,6 +78,8 @@ func _physics_process(delta):
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, SPEED * delta * momentumDampening)
 		
+	changeDirection(movement)
+		
 	move_and_slide()
 
 func setAnimation(animation):
@@ -83,3 +88,13 @@ func setAnimation(animation):
 
 func animationEnded():
 	return $Sprite.frame_progress >= 1.0
+
+var isFlipped : bool = false
+func changeDirection(movement):
+	var direction = sign(movement.x)
+	var shouldBeFlipped :bool = direction == -1
+	
+	if direction and shouldBeFlipped != isFlipped:
+		scale.x = -1
+		isFlipped = shouldBeFlipped
+

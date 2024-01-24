@@ -64,7 +64,7 @@ size = Vector2(118, 20)
 size = Vector2(59, 33)
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 8388608
+collision_layer = 8388610
 collision_mask = 8388609
 script = ExtResource("1_5tybj")
 
@@ -79,6 +79,8 @@ animation = &"idle"
 shape = SubResource("CapsuleShape2D_65r7v")
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
 
 [node name="HitboxCollider" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 0.625)
@@ -86,6 +88,8 @@ shape = SubResource("RectangleShape2D_04agm")
 
 [node name="LightFeatherHurtbox" type="Area2D" parent="."]
 visible = false
+collision_layer = 0
+collision_mask = 128
 monitorable = false
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="LightFeatherHurtbox"]
@@ -94,6 +98,8 @@ shape = SubResource("RectangleShape2D_5oplk")
 
 [node name="HeavyFeatherHurtbox" type="Area2D" parent="."]
 visible = false
+collision_layer = 0
+collision_mask = 128
 monitorable = false
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="HeavyFeatherHurtbox"]
