@@ -81,10 +81,12 @@ floor_max_angle = 1.45211
 position = Vector2(257, 245)
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_1p385")
+one_way_collision = true
 
 [node name="Lower Boundary" type="CollisionShape2D" parent="Environment"]
 position = Vector2(256, 427.7)
 shape = SubResource("WorldBoundaryShape2D_1p385")
+one_way_collision = true
 
 [node name="Background" type="Sprite2D" parent="Environment" node_paths=PackedStringArray("followTarget")]
 z_index = -2
@@ -130,7 +132,6 @@ shape = SubResource("RectangleShape2D_61v6l")
 [node name="Tree" type="CollisionShape2D" parent="Environment/Stage1/Colliders"]
 position = Vector2(764, 238)
 rotation = 0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_61v6l")
 
 [node name="Stage2" type="Node2D" parent="Environment"]
@@ -182,7 +183,6 @@ centered = false
 [node name="Sign" type="CollisionShape2D" parent="Environment/Stage3/Colliders"]
 position = Vector2(117.1, 224)
 rotation = 0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_61v6l")
 
 [node name="StageCenter" type="CollisionShape2D" parent="Environment/Stage3/Colliders"]
@@ -249,13 +249,12 @@ shape = SubResource("SegmentShape2D_cok71")
 position = Vector2(322, 239)
 limit_left = 0
 limit_top = 0
+limit_right = 759
 limit_bottom = 428
-position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("3_lx5w6")
 followTarget = NodePath("../Player")
 followOffset = Vector2(0, -120)
-followStrength = 2.5
 
 [node name="GIANTORANGEARROW" type="Polygon2D" parent="Camera"]
 position = Vector2(262, -60)
@@ -265,44 +264,81 @@ polygon = PackedVector2Array(1, 0, -1, -24, -67, -25, -67, -85, 5, -84, 6, -102,
 [node name="ArrowTimer" type="Timer" parent="Camera/GIANTORANGEARROW"]
 autostart = true
 
-[node name="Bounds" type="Area2D" parent="Camera"]
+[node name="Bounds" type="StaticBody2D" parent="Camera"]
 position = Vector2(-572, 209)
-collision_layer = 8388608
+collision_layer = 8388609
 collision_mask = 8388608
 
 [node name="LeftBoundary" type="CollisionShape2D" parent="Camera/Bounds"]
 position = Vector2(250, -109)
 rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_1p385")
+one_way_collision = true
 
 [node name="RightBoundary" type="CollisionShape2D" parent="Camera/Bounds"]
 position = Vector2(892, -96)
 rotation = -1.5708
 shape = SubResource("WorldBoundaryShape2D_1p385")
+one_way_collision = true
 
-[node name="WaveBoundary" parent="." instance=ExtResource("5_uywg0")]
-position = Vector2(332, 548)
+[node name="Encounter1" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
+position = Vector2(604, 437)
+graveyard = NodePath("../Graveyard")
+cameraXLimit = 1215.9
 
-[node name="Node2D" type="Node2D" parent="WaveBoundary"]
+[node name="Wave1" type="Node2D" parent="Encounter1"]
+position = Vector2(5, -126)
 
-[node name="Slime" parent="WaveBoundary/Node2D" instance=ExtResource("5_6vdjg")]
-position = Vector2(464, 122)
+[node name="Slime" parent="Encounter1/Wave1" instance=ExtResource("5_6vdjg")]
+position = Vector2(-60, 81)
 collision_layer = 0
 
-[node name="Slime2" parent="WaveBoundary/Node2D" instance=ExtResource("5_6vdjg")]
-position = Vector2(646, 129)
+[node name="Slime2" parent="Encounter1/Wave1" instance=ExtResource("5_6vdjg")]
+position = Vector2(84, 63)
 collision_layer = 0
 
-[node name="Node2D2" type="Node2D" parent="WaveBoundary"]
+[node name="Wave2" type="Node2D" parent="Encounter1"]
+position = Vector2(-4, -167)
 
-[node name="Slime" parent="WaveBoundary/Node2D2" instance=ExtResource("5_6vdjg")]
-position = Vector2(394, 67)
+[node name="Slime" parent="Encounter1/Wave2" instance=ExtResource("5_6vdjg")]
+position = Vector2(-69, 40)
 collision_layer = 0
 
-[node name="Slime2" parent="WaveBoundary/Node2D2" instance=ExtResource("5_6vdjg")]
-position = Vector2(608, 79)
+[node name="Slime2" parent="Encounter1/Wave2" instance=ExtResource("5_6vdjg")]
+position = Vector2(100, 42)
 collision_layer = 0
+
+[node name="Encounter2" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
+position = Vector2(1060, 266)
+graveyard = NodePath("../Graveyard")
+cameraXLimit = 1631.0
+
+[node name="Wave1" type="Node2D" parent="Encounter2"]
+
+[node name="Wave2" type="Node2D" parent="Encounter2"]
+
+[node name="Encounter3" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
+position = Vector2(1468, 415)
+graveyard = NodePath("../Graveyard")
+cameraXLimit = 2247.0
+
+[node name="Wave1" type="Node2D" parent="Encounter3"]
+
+[node name="Encounter4" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
+position = Vector2(2089, 302)
+graveyard = NodePath("../Graveyard")
+cameraXLimit = 2448.0
+
+[node name="Wave1" type="Node2D" parent="Encounter4"]
+
+[node name="Wave2" type="Node2D" parent="Encounter4"]
+
+[node name="Wave3" type="Node2D" parent="Encounter4"]
+
+[node name="Graveyard" type="Node2D" parent="."]
 
 [connection signal="timeout" from="Camera/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
-[connection signal="body_entered" from="Camera/Bounds" to="Camera" method="_on_right_border_body_entered"]
-[connection signal="body_exited" from="Camera/Bounds" to="Camera" method="_on_right_border_body_exited"]
+[connection signal="died" from="Encounter1/Wave1/Slime" to="Encounter1" method="enemyHasDied"]
+[connection signal="died" from="Encounter1/Wave1/Slime2" to="Encounter1" method="enemyHasDied"]
+[connection signal="died" from="Encounter1/Wave2/Slime" to="Encounter1" method="enemyHasDied"]
+[connection signal="died" from="Encounter1/Wave2/Slime2" to="Encounter1" method="enemyHasDied"]

@@ -62,6 +62,7 @@ func _physics_process(delta):
 				attackType = AttackType.Beans
 			elif jump:
 				playerState = PlayerState.Airborne
+			changeDirection(movement)
 		PlayerState.Airborne:
 			pass
 		PlayerState.Dodging:
@@ -97,7 +98,7 @@ func _physics_process(delta):
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, SPEED * delta * momentumDampening)
 		
-	changeDirection(movement)
+	
 	
 	move_and_slide()
 

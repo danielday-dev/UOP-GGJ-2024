@@ -3,6 +3,8 @@ extends CharacterBody2D
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+signal died(body)
+
 @export var SPEED:float = 50
 @export var momentumDampening:float = 40
 @export var Attacks : Array[AttackInfo]
@@ -17,6 +19,7 @@ enum EnemyState{
 	Attacking,
 	Stunned,
 	Prone,
+	Dead,
 }
 var enemyState : EnemyState = EnemyState.Grounded
 
@@ -98,3 +101,5 @@ func changeDirection(movement):
 		scale.x = -1
 		isFlipped = shouldBeFlipped
 
+func die():
+	died.emit()
