@@ -5,12 +5,14 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_peagi"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_oyk4n")
-}],
+"frames": [],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"lightAttack",
 "speed": 5.0
 }, {
 "frames": [{
@@ -25,7 +27,7 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ac44"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y3ru7"]
-size = Vector2(24, 44)
+size = Vector2(20, 36)
 
 [node name="Enemy" type="CharacterBody2D"]
 y_sort_enabled = true
