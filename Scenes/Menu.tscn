@@ -69,5 +69,6 @@ script = ExtResource("4_i6fd0")
 z_as_relative = false
 position = Vector2(300, 200)
 sprite_frames = SubResource("SpriteFrames_8gmwp")
+autoplay = "default"
 
 [connection signal="pressed" from="MenuButton" to="MenuButton" method="_onPressed"]

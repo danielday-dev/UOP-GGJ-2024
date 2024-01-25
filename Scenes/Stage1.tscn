@@ -1,11 +1,12 @@
-[gd_scene load_steps=29 format=3 uid="uid://dinv8peksev2j"]
+[gd_scene load_steps=42 format=3 uid="uid://dinv8peksev2j"]
 
 [ext_resource type="PackedScene" uid="uid://w0vu14krjed8" path="res://Prefabs/Player.tscn" id="1_qlw6n"]
-[ext_resource type="Texture2D" uid="uid://rgy75j2ulikp" path="res://Resources/Stage/Stage1.png" id="3_cet44"]
+[ext_resource type="Script" path="res://Source/Stage1.gd" id="1_rrbid"]
+[ext_resource type="Texture2D" uid="uid://c41p1o6vfwogu" path="res://Resources/Stage/Stage1.png" id="3_cet44"]
 [ext_resource type="Script" path="res://Source/Camera.gd" id="3_lx5w6"]
 [ext_resource type="Texture2D" uid="uid://bnycr4leybth6" path="res://Resources/Stage/StageBackground.png" id="3_xynd4"]
 [ext_resource type="Script" path="res://Source/Parallax.gd" id="4_5f4e1"]
-[ext_resource type="PackedScene" uid="uid://ookmlec53d3y" path="res://Prefabs/Slime.tscn" id="5_6vdjg"]
+[ext_resource type="PackedScene" uid="uid://c0kmrpokgc4mj" path="res://Prefabs/Slime.tscn" id="5_6vdjg"]
 [ext_resource type="Texture2D" uid="uid://bax34fwxtdlmh" path="res://Resources/Stage/StageBackgroundLower.png" id="5_gcknl"]
 [ext_resource type="PackedScene" uid="uid://8h7fobbv051y" path="res://Prefabs/WaveBoundary.tscn" id="5_uywg0"]
 [ext_resource type="Texture2D" uid="uid://cjtb8udiam2s8" path="res://Resources/Stage/Stage2.png" id="6_1f00w"]
@@ -13,9 +14,83 @@
 [ext_resource type="Texture2D" uid="uid://d15lpgvf0jh4i" path="res://Resources/Stage/Stage4.png" id="8_g0il6"]
 [ext_resource type="Texture2D" uid="uid://cqnun2g1phpk3" path="res://Resources/Stage/Stage5Bottom.png" id="9_kwy48"]
 [ext_resource type="Texture2D" uid="uid://csp3txgtghwrj" path="res://Resources/Stage/Stage5Top.png" id="10_m8pxg"]
+[ext_resource type="Texture2D" uid="uid://dk7asgkg011pq" path="res://Resources/UI/UI-Movement.png" id="12_00emt"]
+[ext_resource type="Texture2D" uid="uid://5y24ji8hbnao" path="res://Resources/UI/UI-Other.png" id="13_qb67p"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p385"]
 distance = -0.999969
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ymr3"]
+atlas = ExtResource("12_00emt")
+region = Rect2(0, 0, 300, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpfpq"]
+atlas = ExtResource("12_00emt")
+region = Rect2(300, 0, 300, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buthi"]
+atlas = ExtResource("12_00emt")
+region = Rect2(600, 0, 300, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47xgq"]
+atlas = ExtResource("12_00emt")
+region = Rect2(900, 0, 300, 306)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ww0qf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ymr3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpfpq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buthi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47xgq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5qjx"]
+atlas = ExtResource("13_qb67p")
+region = Rect2(0, 0, 552, 444)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcw6t"]
+atlas = ExtResource("13_qb67p")
+region = Rect2(552, 0, 552, 444)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s74s"]
+atlas = ExtResource("13_qb67p")
+region = Rect2(1104, 0, 552, 444)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55kom"]
+atlas = ExtResource("13_qb67p")
+region = Rect2(1656, 0, 552, 444)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c38vv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5qjx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcw6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s74s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55kom")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61v6l"]
 size = Vector2(60, 60)
@@ -70,8 +145,13 @@ b = Vector2(-333, -294)
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_qlw6n")]
+z_as_relative = false
 position = Vector2(184, 288)
 floor_max_angle = 1.45211
+
+[node name="Slime" parent="." instance=ExtResource("5_6vdjg")]
+z_as_relative = false
+position = Vector2(489, 473)
 
 [node name="Environment" type="StaticBody2D" parent="."]
 
@@ -89,7 +169,7 @@ one_way_collision = true
 [node name="Background" type="Sprite2D" parent="Environment" node_paths=PackedStringArray("followTarget")]
 z_index = -2
 texture_repeat = 2
-position = Vector2(-767, 0)
+position = Vector2(-849, 0)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_xynd4")
 centered = false
@@ -97,20 +177,32 @@ region_enabled = true
 region_rect = Rect2(0, 0, 10000, 696)
 script = ExtResource("4_5f4e1")
 followTarget = NodePath("../../Camera")
-followRate = 0.15
+followRate = 0.9
+
+[node name="UI_Movement" type="AnimatedSprite2D" parent="Environment"]
+position = Vector2(176.5, 124.5)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_ww0qf")
+autoplay = "default"
+
+[node name="UI_Other" type="AnimatedSprite2D" parent="Environment"]
+position = Vector2(314.5, 136.5)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_c38vv")
+autoplay = "default"
 
 [node name="BackgroundLower" type="Sprite2D" parent="Environment" node_paths=PackedStringArray("followTarget")]
 z_index = -2
 texture_repeat = 2
-position = Vector2(-545, 34)
+position = Vector2(-627, 35)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("5_gcknl")
 centered = false
 region_enabled = true
-region_rect = Rect2(0, 0, 10000, 696)
+region_rect = Rect2(0, 0, 10000, 680)
 script = ExtResource("4_5f4e1")
 followTarget = NodePath("../../Camera")
-followRate = 0.2
+followRate = 0.85
 
 [node name="Stage1" type="Node2D" parent="Environment"]
 
@@ -289,22 +381,18 @@ position = Vector2(5, -126)
 
 [node name="Slime" parent="Encounter1/Wave1" instance=ExtResource("5_6vdjg")]
 position = Vector2(-60, 81)
-collision_layer = 0
 
 [node name="Slime2" parent="Encounter1/Wave1" instance=ExtResource("5_6vdjg")]
 position = Vector2(84, 63)
-collision_layer = 0
 
 [node name="Wave2" type="Node2D" parent="Encounter1"]
 position = Vector2(-4, -167)
 
 [node name="Slime" parent="Encounter1/Wave2" instance=ExtResource("5_6vdjg")]
 position = Vector2(-69, 40)
-collision_layer = 0
 
 [node name="Slime2" parent="Encounter1/Wave2" instance=ExtResource("5_6vdjg")]
 position = Vector2(100, 42)
-collision_layer = 0
 
 [node name="Encounter2" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
 position = Vector2(1060, 266)
@@ -335,6 +423,7 @@ cameraXLimit = 2448.0
 
 [node name="Graveyard" type="Node2D" parent="."]
 
+[connection signal="died" from="Slime" to="Encounter1" method="enemyHasDied"]
 [connection signal="timeout" from="Camera/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
 [connection signal="died" from="Encounter1/Wave1/Slime" to="Encounter1" method="enemyHasDied"]
 [connection signal="died" from="Encounter1/Wave1/Slime2" to="Encounter1" method="enemyHasDied"]
