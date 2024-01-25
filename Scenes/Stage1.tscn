@@ -102,7 +102,7 @@ followRate = 0.15
 [node name="BackgroundLower" type="Sprite2D" parent="Environment" node_paths=PackedStringArray("followTarget")]
 z_index = -2
 texture_repeat = 2
-position = Vector2(-1130, 60)
+position = Vector2(-545, 34)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("5_gcknl")
 centered = false
@@ -130,7 +130,6 @@ shape = SubResource("RectangleShape2D_61v6l")
 [node name="Tree" type="CollisionShape2D" parent="Environment/Stage1/Colliders"]
 position = Vector2(764, 238)
 rotation = 0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_61v6l")
 
 [node name="Stage2" type="Node2D" parent="Environment"]
@@ -182,7 +181,6 @@ centered = false
 [node name="Sign" type="CollisionShape2D" parent="Environment/Stage3/Colliders"]
 position = Vector2(117.1, 224)
 rotation = 0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_61v6l")
 
 [node name="StageCenter" type="CollisionShape2D" parent="Environment/Stage3/Colliders"]
