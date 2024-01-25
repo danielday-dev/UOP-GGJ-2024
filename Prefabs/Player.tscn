@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://w0vu14krjed8"]
+[gd_scene load_steps=13 format=3 uid="uid://w0vu14krjed8"]
 
 [ext_resource type="Script" path="res://Source/Player.gd" id="1_5tybj"]
 [ext_resource type="Texture2D" uid="uid://dcbfl12e1436o" path="res://Resources/Player/Player_Temp.png" id="2_e2lat"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cotk2ke81lhb" path="res://Resources/Player/Player_Temp_Light.png" id="5_qvxf6"]
 [ext_resource type="Texture2D" uid="uid://w1inxvy85ax" path="res://Resources/Player/Player_Temp_Idle.png" id="6_s8qij"]
 [ext_resource type="Texture2D" uid="uid://bdvsg54y2o5xy" path="res://Resources/Player/Player_Temp_Moving.png" id="7_4v28w"]
+[ext_resource type="Script" path="res://Source/Attack.gd" id="7_npm28"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l2o41"]
 animations = [{
@@ -88,21 +89,24 @@ position = Vector2(0, 0.625)
 shape = SubResource("RectangleShape2D_04agm")
 
 [node name="LightFeatherHurtbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 128
 monitorable = false
+script = ExtResource("7_npm28")
+attackDamage = 1
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="LightFeatherHurtbox"]
 position = Vector2(57, 1)
 shape = SubResource("RectangleShape2D_5oplk")
 
 [node name="HeavyFeatherHurtbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 128
 monitorable = false
+script = ExtResource("7_npm28")
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="HeavyFeatherHurtbox"]
 position = Vector2(40.5, 2.5)
 shape = SubResource("RectangleShape2D_8fcfc")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
