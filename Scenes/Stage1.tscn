@@ -1,44 +1,261 @@
-[gd_scene load_steps=10 format=3 uid="uid://dinv8peksev2j"]
+[gd_scene load_steps=30 format=3 uid="uid://dinv8peksev2j"]
 
 [ext_resource type="PackedScene" uid="uid://w0vu14krjed8" path="res://Prefabs/Player.tscn" id="1_qlw6n"]
 [ext_resource type="Script" path="res://Source/Stage1.gd" id="1_rrbid"]
+[ext_resource type="Texture2D" uid="uid://rgy75j2ulikp" path="res://Resources/Stage/Stage1.png" id="3_cet44"]
 [ext_resource type="Script" path="res://Source/Camera.gd" id="3_lx5w6"]
-[ext_resource type="Texture2D" uid="uid://670hufup76d2" path="res://Resources/Streetgame game screen.png" id="3_phe7c"]
+[ext_resource type="Texture2D" uid="uid://bnycr4leybth6" path="res://Resources/Stage/StageBackground.png" id="3_xynd4"]
+[ext_resource type="Script" path="res://Source/Parallax.gd" id="4_5f4e1"]
 [ext_resource type="PackedScene" uid="uid://ookmlec53d3y" path="res://Prefabs/Slime.tscn" id="5_6vdjg"]
+[ext_resource type="Texture2D" uid="uid://bax34fwxtdlmh" path="res://Resources/Stage/StageBackgroundLower.png" id="5_gcknl"]
 [ext_resource type="PackedScene" uid="uid://8h7fobbv051y" path="res://Prefabs/WaveBoundary.tscn" id="5_uywg0"]
+[ext_resource type="Texture2D" uid="uid://cjtb8udiam2s8" path="res://Resources/Stage/Stage2.png" id="6_1f00w"]
+[ext_resource type="Texture2D" uid="uid://0foibss0ict5" path="res://Resources/Stage/Stage3.png" id="7_0p6cj"]
+[ext_resource type="Texture2D" uid="uid://d15lpgvf0jh4i" path="res://Resources/Stage/Stage4.png" id="8_g0il6"]
+[ext_resource type="Texture2D" uid="uid://cqnun2g1phpk3" path="res://Resources/Stage/Stage5Bottom.png" id="9_kwy48"]
+[ext_resource type="Texture2D" uid="uid://csp3txgtghwrj" path="res://Resources/Stage/Stage5Top.png" id="10_m8pxg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p385"]
 distance = -0.999969
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hww6s"]
-size = Vector2(68, 150)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_61v6l"]
+size = Vector2(60, 60)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_81e8r"]
-size = Vector2(68, 150)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24e2a"]
+size = Vector2(195.25, 94.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6j4x3"]
+size = Vector2(20, 108)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f4i3h"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_y7vdl"]
+a = Vector2(2, -4)
+b = Vector2(-15, 117)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_eoovj"]
+a = Vector2(13, 76)
+b = Vector2(-11, -44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0w25"]
+size = Vector2(214, 95)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_2yubx"]
+a = Vector2(-136, -113)
+b = Vector2(0, 7)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_2hvw6"]
+a = Vector2(149, -132)
+b = Vector2(60, -41)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_b8vdy"]
+a = Vector2(-55.75, 7.9375)
+b = Vector2(0.25, 32.9375)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_dif1s"]
+a = Vector2(-554, -121)
+b = Vector2(-618, -202)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_cx4qc"]
+a = Vector2(-636, -96)
+b = Vector2(-618, -202)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_g8ehi"]
+a = Vector2(-446, -301)
+b = Vector2(-618, -202)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_cok71"]
+a = Vector2(-555, -257)
+b = Vector2(-333, -294)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_rrbid")
 
 [node name="Player" parent="." instance=ExtResource("1_qlw6n")]
-position = Vector2(-162, 102)
+position = Vector2(184, 288)
+floor_max_angle = 1.45211
 
 [node name="Environment" type="StaticBody2D" parent="."]
 
-[node name="Background" type="Sprite2D" parent="Environment"]
-z_index = -1
-texture = ExtResource("3_phe7c")
-
-[node name="Boundary" type="CollisionShape2D" parent="Environment"]
-position = Vector2(0, 24)
+[node name="Upper Boundary" type="CollisionShape2D" parent="Environment"]
+position = Vector2(257, 245)
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_1p385")
 
-[node name="Boundary2" type="CollisionShape2D" parent="Environment"]
-position = Vector2(1.19209e-07, 178)
+[node name="Lower Boundary" type="CollisionShape2D" parent="Environment"]
+position = Vector2(256, 427.7)
 shape = SubResource("WorldBoundaryShape2D_1p385")
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Background" type="Sprite2D" parent="Environment" node_paths=PackedStringArray("followTarget")]
+z_index = -2
+texture_repeat = 2
+position = Vector2(-767, 0)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_xynd4")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 10000, 696)
+script = ExtResource("4_5f4e1")
+followTarget = NodePath("../../Camera")
+followRate = 0.15
+
+[node name="BackgroundLower" type="Sprite2D" parent="Environment" node_paths=PackedStringArray("followTarget")]
+z_index = -2
+texture_repeat = 2
+position = Vector2(-1130, 60)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("5_gcknl")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 10000, 696)
+script = ExtResource("4_5f4e1")
+followTarget = NodePath("../../Camera")
+followRate = 0.2
+
+[node name="Stage1" type="Node2D" parent="Environment"]
+
+[node name="Sprite" type="Sprite2D" parent="Environment/Stage1"]
+z_index = -1
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("3_cet44")
+centered = false
+
+[node name="Colliders" type="StaticBody2D" parent="Environment/Stage1"]
+
+[node name="Sign" type="CollisionShape2D" parent="Environment/Stage1/Colliders"]
+position = Vector2(488, 220)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_61v6l")
+
+[node name="Tree" type="CollisionShape2D" parent="Environment/Stage1/Colliders"]
+position = Vector2(764, 238)
+rotation = 0.785398
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_61v6l")
+
+[node name="Stage2" type="Node2D" parent="Environment"]
+position = Vector2(762, 0)
+
+[node name="Sprite" type="Sprite2D" parent="Environment/Stage2"]
+z_index = -1
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("6_1f00w")
+centered = false
+
+[node name="Colliders" type="StaticBody2D" parent="Environment/Stage2"]
+
+[node name="TentThing" type="CollisionShape2D" parent="Environment/Stage2/Colliders"]
+position = Vector2(359.375, 224.875)
+shape = SubResource("RectangleShape2D_24e2a")
+
+[node name="FenceTop" type="CollisionShape2D" parent="Environment/Stage2/Colliders"]
+position = Vector2(445, 248)
+shape = SubResource("RectangleShape2D_6j4x3")
+
+[node name="FenceTopCap" type="CollisionShape2D" parent="Environment/Stage2/Colliders"]
+position = Vector2(445, 302)
+shape = SubResource("CircleShape2D_f4i3h")
+
+[node name="FenceBottomCap" type="CollisionShape2D" parent="Environment/Stage2/Colliders"]
+position = Vector2(449, 369)
+shape = SubResource("CircleShape2D_f4i3h")
+
+[node name="FenceBottomSegment" type="CollisionShape2D" parent="Environment/Stage2/Colliders"]
+position = Vector2(437, 373)
+shape = SubResource("SegmentShape2D_y7vdl")
+
+[node name="FenceBottomSegment2" type="CollisionShape2D" parent="Environment/Stage2/Colliders"]
+position = Vector2(470, 413)
+shape = SubResource("SegmentShape2D_eoovj")
+
+[node name="Stage3" type="Node2D" parent="Environment"]
+position = Vector2(1215.9, 0)
+
+[node name="Sprite" type="Sprite2D" parent="Environment/Stage3"]
+z_index = -1
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("7_0p6cj")
+centered = false
+
+[node name="Colliders" type="StaticBody2D" parent="Environment/Stage3"]
+
+[node name="Sign" type="CollisionShape2D" parent="Environment/Stage3/Colliders"]
+position = Vector2(117.1, 224)
+rotation = 0.785398
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_61v6l")
+
+[node name="StageCenter" type="CollisionShape2D" parent="Environment/Stage3/Colliders"]
+position = Vector2(416.1, 249.5)
+shape = SubResource("RectangleShape2D_v0w25")
+
+[node name="StageLeft" type="CollisionShape2D" parent="Environment/Stage3/Colliders"]
+position = Vector2(309.1, 290)
+shape = SubResource("SegmentShape2D_2yubx")
+
+[node name="StageRight" type="CollisionShape2D" parent="Environment/Stage3/Colliders"]
+position = Vector2(463.1, 338)
+shape = SubResource("SegmentShape2D_2hvw6")
+
+[node name="Stage4" type="Node2D" parent="Environment"]
+position = Vector2(1631, 0)
+
+[node name="Sprite" type="Sprite2D" parent="Environment/Stage4"]
+z_index = -1
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_g0il6")
+centered = false
+
+[node name="Colliders" type="StaticBody2D" parent="Environment/Stage4"]
+
+[node name="Corner" type="CollisionShape2D" parent="Environment/Stage4/Colliders"]
+position = Vector2(585.75, 216.063)
+shape = SubResource("SegmentShape2D_b8vdy")
+
+[node name="Stage5" type="Node2D" parent="Environment"]
+position = Vector2(2247.6, 0)
+
+[node name="Sprite" type="Sprite2D" parent="Environment/Stage5"]
+z_index = -1
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("9_kwy48")
+centered = false
+
+[node name="SpriteTop" type="Sprite2D" parent="Environment/Stage5"]
+z_index = 999
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("10_m8pxg")
+centered = false
+
+[node name="Colliders" type="StaticBody2D" parent="Environment/Stage5"]
+
+[node name="Wall1" type="CollisionShape2D" parent="Environment/Stage5/Colliders"]
+position = Vector2(562.4, 425)
+shape = SubResource("SegmentShape2D_dif1s")
+
+[node name="Wall2" type="CollisionShape2D" parent="Environment/Stage5/Colliders"]
+position = Vector2(676.4, 568)
+shape = SubResource("SegmentShape2D_cx4qc")
+
+[node name="Wall3" type="CollisionShape2D" parent="Environment/Stage5/Colliders"]
+position = Vector2(676.4, 568)
+shape = SubResource("SegmentShape2D_g8ehi")
+
+[node name="Wall4" type="CollisionShape2D" parent="Environment/Stage5/Colliders"]
+position = Vector2(563.4, 561)
+shape = SubResource("SegmentShape2D_cok71")
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("followTarget")]
+position = Vector2(322, 239)
+limit_left = 0
+limit_top = 0
+limit_bottom = 428
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 script = ExtResource("3_lx5w6")
+followTarget = NodePath("../Player")
+followOffset = Vector2(0, -120)
+followStrength = 2.5
 
 [node name="GIANTORANGEARROW" type="Polygon2D" parent="Camera"]
 position = Vector2(262, -60)
@@ -48,36 +265,23 @@ polygon = PackedVector2Array(1, 0, -1, -24, -67, -25, -67, -85, 5, -84, 6, -102,
 [node name="ArrowTimer" type="Timer" parent="Camera/GIANTORANGEARROW"]
 autostart = true
 
-[node name="RightBorder" type="Area2D" parent="Camera"]
+[node name="Bounds" type="Area2D" parent="Camera"]
 position = Vector2(-572, 209)
 collision_layer = 8388608
 collision_mask = 8388608
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/RightBorder"]
-position = Vector2(858, -104)
-shape = SubResource("RectangleShape2D_hww6s")
+[node name="LeftBoundary" type="CollisionShape2D" parent="Camera/Bounds"]
+position = Vector2(250, -109)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_1p385")
 
-[node name="Boundary4" type="CollisionShape2D" parent="Camera/RightBorder"]
+[node name="RightBoundary" type="CollisionShape2D" parent="Camera/Bounds"]
 position = Vector2(892, -96)
 rotation = -1.5708
 shape = SubResource("WorldBoundaryShape2D_1p385")
 
-[node name="LeftBorder" type="Area2D" parent="Camera"]
-position = Vector2(-286, 104.5)
-collision_layer = 8388608
-collision_mask = 8388608
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/LeftBorder"]
-position = Vector2(1, 0.5)
-shape = SubResource("RectangleShape2D_81e8r")
-
-[node name="Boundary3" type="CollisionShape2D" parent="Camera/LeftBorder"]
-position = Vector2(-36, -4.5)
-rotation = 1.5708
-shape = SubResource("WorldBoundaryShape2D_1p385")
-
 [node name="WaveBoundary" parent="." instance=ExtResource("5_uywg0")]
-position = Vector2(-14, 6)
+position = Vector2(332, 548)
 
 [node name="Node2D" type="Node2D" parent="WaveBoundary"]
 
@@ -100,7 +304,5 @@ position = Vector2(608, 79)
 collision_layer = 0
 
 [connection signal="timeout" from="Camera/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
-[connection signal="body_entered" from="Camera/RightBorder" to="Camera" method="_on_right_border_body_entered"]
-[connection signal="body_exited" from="Camera/RightBorder" to="Camera" method="_on_right_border_body_exited"]
-[connection signal="body_entered" from="Camera/LeftBorder" to="Camera" method="_on_left_border_body_entered"]
-[connection signal="body_exited" from="Camera/LeftBorder" to="Camera" method="_on_left_border_body_exited"]
+[connection signal="body_entered" from="Camera/Bounds" to="Camera" method="_on_right_border_body_entered"]
+[connection signal="body_exited" from="Camera/Bounds" to="Camera" method="_on_right_border_body_exited"]
