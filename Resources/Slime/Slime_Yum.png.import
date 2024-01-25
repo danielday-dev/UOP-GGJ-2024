@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7lbsruaor7j3"
-path="res://.godot/imported/Slime_Yum1.png-a16715361d8b6cf4072ecb9afe4fd5e8.ctex"
+uid="uid://druut22w4jg2s"
+path="res://.godot/imported/Slime_Yum.png-f4f5ec3d3a606581721fba37d3330561.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Slime/Slime_Yum1.png"
-dest_files=["res://.godot/imported/Slime_Yum1.png-a16715361d8b6cf4072ecb9afe4fd5e8.ctex"]
+source_file="res://Resources/Slime/Slime_Yum.png"
+dest_files=["res://.godot/imported/Slime_Yum.png-f4f5ec3d3a606581721fba37d3330561.ctex"]
 
 [params]
 
