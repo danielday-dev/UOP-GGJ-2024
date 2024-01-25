@@ -14,10 +14,14 @@ var children
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	children = get_children()
+	
 	for child in children:
 		if !(child is Timer) and !(child is CollisionShape2D):
 			child.hide()
 			child.set_process(false)
+			for kid in child.get_children():
+				kid.died.connect(enemyHasDied)
+				
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

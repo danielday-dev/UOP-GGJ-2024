@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0kmrpokgc4mj"]
+[gd_scene load_steps=10 format=3 uid="uid://ookmlec53d3y"]
 
 [ext_resource type="PackedScene" uid="uid://ymj72rk301d8" path="res://Prefabs/Enemy.tscn" id="1_ox14j"]
 [ext_resource type="Script" path="res://Resources/AttackInfo.gd" id="2_vai6y"]
 [ext_resource type="Texture2D" uid="uid://dv0pmsp8e0a00" path="res://Resources/Slime/Slime_Idle.png" id="3_be4le"]
 [ext_resource type="Texture2D" uid="uid://blhv4t5ktldnv" path="res://Resources/Slime/Slime_Yum2.png" id="4_jm00p"]
 [ext_resource type="Texture2D" uid="uid://druut22w4jg2s" path="res://Resources/Slime/Slime_Yum.png" id="4_oe25i"]
+[ext_resource type="Script" path="res://Source/Attack.gd" id="6_nja8o"]
 
 [sub_resource type="Resource" id="Resource_mat2o"]
 script = ExtResource("2_vai6y")
@@ -68,6 +69,7 @@ position = Vector2(0, 0)
 collision_layer = 0
 collision_mask = 32
 monitorable = false
+script = ExtResource("6_nja8o")
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="Yom" index="0"]
 position = Vector2(36, 0)

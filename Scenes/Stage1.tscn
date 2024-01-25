@@ -1,12 +1,11 @@
-[gd_scene load_steps=42 format=3 uid="uid://dinv8peksev2j"]
+[gd_scene load_steps=41 format=3 uid="uid://dinv8peksev2j"]
 
 [ext_resource type="PackedScene" uid="uid://w0vu14krjed8" path="res://Prefabs/Player.tscn" id="1_qlw6n"]
-[ext_resource type="Script" path="res://Source/Stage1.gd" id="1_rrbid"]
 [ext_resource type="Texture2D" uid="uid://c41p1o6vfwogu" path="res://Resources/Stage/Stage1.png" id="3_cet44"]
 [ext_resource type="Script" path="res://Source/Camera.gd" id="3_lx5w6"]
 [ext_resource type="Texture2D" uid="uid://bnycr4leybth6" path="res://Resources/Stage/StageBackground.png" id="3_xynd4"]
 [ext_resource type="Script" path="res://Source/Parallax.gd" id="4_5f4e1"]
-[ext_resource type="PackedScene" uid="uid://c0kmrpokgc4mj" path="res://Prefabs/Slime.tscn" id="5_6vdjg"]
+[ext_resource type="PackedScene" uid="uid://ookmlec53d3y" path="res://Prefabs/Slime.tscn" id="5_6vdjg"]
 [ext_resource type="Texture2D" uid="uid://bax34fwxtdlmh" path="res://Resources/Stage/StageBackgroundLower.png" id="5_gcknl"]
 [ext_resource type="PackedScene" uid="uid://8h7fobbv051y" path="res://Prefabs/WaveBoundary.tscn" id="5_uywg0"]
 [ext_resource type="Texture2D" uid="uid://cjtb8udiam2s8" path="res://Resources/Stage/Stage2.png" id="6_1f00w"]
@@ -143,7 +142,6 @@ a = Vector2(-555, -257)
 b = Vector2(-333, -294)
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_rrbid")
 
 [node name="Player" parent="." instance=ExtResource("1_qlw6n")]
 z_as_relative = false
@@ -373,7 +371,7 @@ shape = SubResource("WorldBoundaryShape2D_1p385")
 one_way_collision = true
 
 [node name="Encounter1" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
-position = Vector2(604, 437)
+position = Vector2(601, 399)
 graveyard = NodePath("../Graveyard")
 cameraXLimit = 1215.9
 

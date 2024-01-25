@@ -29,6 +29,9 @@ var player : CharacterBody2D
 
 func _ready():
 	player = $/root/Main/Player
+	for attack in Attacks:
+		var attackNode = get_node(attack.hurtboxName)
+		attackNode.attackDamage = attack.damage
 
 func _physics_process(delta):
 	var movement : Vector2
@@ -103,3 +106,10 @@ func changeDirection(movement):
 
 func die():
 	died.emit()
+	enemyState = EnemyState.Dead
+
+
+func _on_enemy_hitbox_area_entered(area):
+	currentHealth -= area.attackDamage
+	if currentHealth <= 0:
+		die()

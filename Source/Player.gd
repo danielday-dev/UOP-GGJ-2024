@@ -31,6 +31,7 @@ var attackType : AttackType = AttackType.Beans
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 #const JUMP_VELOCITY = -400.0
 
+
 func _physics_process(delta):
 	var moveMultiplier: float = 0
 	
@@ -58,8 +59,10 @@ func _physics_process(delta):
 			elif dodge:
 				playerState = PlayerState.Dodging
 			elif beans:
-				playerState = PlayerState.Attacking
-				attackType = AttackType.Beans
+				if numBeans >= 0:
+					numBeans -= 1
+					playerState = PlayerState.Attacking
+					attackType = AttackType.Beans
 			elif jump:
 				playerState = PlayerState.Airborne
 			changeDirection(movement)
@@ -117,4 +120,11 @@ func changeDirection(movement):
 	if direction and shouldBeFlipped != isFlipped:
 		scale.x = -1
 		isFlipped = shouldBeFlipped 
-	
+
+func _on_hitbox_area_entered(area):
+	currentHealth -= area.damage
+	if currentHealth <= 0:
+		die()
+
+func die():
+	print("easy mode is now available")
