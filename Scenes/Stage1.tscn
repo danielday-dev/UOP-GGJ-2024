@@ -104,7 +104,7 @@ followRate = 0.15
 [node name="BackgroundLower" type="Sprite2D" parent="Environment" node_paths=PackedStringArray("followTarget")]
 z_index = -2
 texture_repeat = 2
-position = Vector2(-1130, 60)
+position = Vector2(-545, 34)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("5_gcknl")
 centered = false
