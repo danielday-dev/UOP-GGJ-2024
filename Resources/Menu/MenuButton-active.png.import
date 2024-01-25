@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://670hufup76d2"
-path="res://.godot/imported/Streetgame game screen.png-fd19305483c8c05c76e63ed7a8b6ba87.ctex"
+uid="uid://dw6obuytdfvfe"
+path="res://.godot/imported/MenuButton-active.png-5acbdcec6193c796ea4658af2665ac32.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Streetgame game screen.png"
-dest_files=["res://.godot/imported/Streetgame game screen.png-fd19305483c8c05c76e63ed7a8b6ba87.ctex"]
+source_file="res://Resources/Menu/MenuButton-active.png"
+dest_files=["res://.godot/imported/MenuButton-active.png-5acbdcec6193c796ea4658af2665ac32.ctex"]
 
 [params]
 

@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://brhpu6rkh43kg"]
+
+[ext_resource type="Texture2D" uid="uid://b3es6pgf38t5" path="res://Resources/Menu/Menu.png" id="1_d3d2f"]
+[ext_resource type="Texture2D" uid="uid://dw6obuytdfvfe" path="res://Resources/Menu/MenuButton-active.png" id="2_lxa8f"]
+[ext_resource type="Texture2D" uid="uid://ku1x7nwp7a7g" path="res://Resources/Menu/MenuButton-highlight.png" id="3_nbsel"]
+[ext_resource type="Texture2D" uid="uid://ddnc7gsiuaiei" path="res://Resources/Menu/MenuButton.png" id="4_5lmfo"]
+[ext_resource type="Script" path="res://Source/MenuButton.gd" id="4_i6fd0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih313"]
+atlas = ExtResource("4_5lmfo")
+region = Rect2(0, 0, 600, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cstml"]
+atlas = ExtResource("4_5lmfo")
+region = Rect2(600, 0, 600, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxciu"]
+atlas = ExtResource("4_5lmfo")
+region = Rect2(1200, 0, 600, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0anqo"]
+atlas = ExtResource("4_5lmfo")
+region = Rect2(1800, 0, 600, 400)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8gmwp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ih313")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cstml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxciu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0anqo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Menu" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_d3d2f")
+centered = false
+
+[node name="MenuButton" type="TextureButton" parent="."]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 225.0
+offset_top = 130.0
+offset_right = 825.0
+offset_bottom = 530.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+texture_pressed = ExtResource("2_lxa8f")
+texture_hover = ExtResource("3_nbsel")
+script = ExtResource("4_i6fd0")
+
+[node name="Button Animation" type="AnimatedSprite2D" parent="MenuButton"]
+z_as_relative = false
+position = Vector2(300, 200)
+sprite_frames = SubResource("SpriteFrames_8gmwp")
+
+[connection signal="pressed" from="MenuButton" to="MenuButton" method="_onPressed"]
