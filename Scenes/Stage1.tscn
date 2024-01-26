@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dinv8peksev2j"]
+[gd_scene load_steps=53 format=3 uid="uid://dinv8peksev2j"]
 
 [ext_resource type="PackedScene" uid="uid://w0vu14krjed8" path="res://Prefabs/Player.tscn" id="1_qlw6n"]
 [ext_resource type="Texture2D" uid="uid://c41p1o6vfwogu" path="res://Resources/Stage/Stage1.png" id="3_cet44"]
@@ -18,6 +18,13 @@
 [ext_resource type="Script" path="res://Source/HealthBar.gd" id="15_7kvum"]
 [ext_resource type="Script" path="res://Source/Heart.gd" id="16_0muk3"]
 [ext_resource type="PackedScene" uid="uid://d0qtdulijsgw1" path="res://Prefabs/RestartTimer.tscn" id="16_3wy6l"]
+[ext_resource type="Texture2D" uid="uid://cq5nlkslctfrp" path="res://Resources/UI/UI-HeartEmpty.png" id="16_gdh58"]
+[ext_resource type="Texture2D" uid="uid://ck4ggx3xft5qe" path="res://Resources/UI/UI-HeartFull.png" id="17_468l2"]
+[ext_resource type="Texture2D" uid="uid://cbtkofpmrqpmv" path="res://Resources/UI/UI-HeartHalf.png" id="18_wp7r5"]
+[ext_resource type="Script" path="res://Source/Bean.gd" id="20_1imqh"]
+[ext_resource type="Script" path="res://Source/BeanBar.gd" id="20_bfdv7"]
+[ext_resource type="Texture2D" uid="uid://uy8ke61714fo" path="res://Resources/UI/UI-BeanEmpty.png" id="20_wc2ep"]
+[ext_resource type="Texture2D" uid="uid://ch2x5st0gdl20" path="res://Resources/UI/UI-BeanFull.png" id="21_0tu0x"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p385"]
 distance = -0.999969
@@ -146,19 +153,47 @@ b = Vector2(-333, -294)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3phr8"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_gdh58")
+}],
 "loop": true,
 "name": &"empty",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_468l2")
+}],
 "loop": true,
 "name": &"full",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_wp7r5")
+}],
 "loop": true,
 "name": &"half",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dbp1q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_wc2ep")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_0tu0x")
+}],
+"loop": true,
+"name": &"full",
 "speed": 5.0
 }]
 
@@ -390,35 +425,64 @@ offset_bottom = 40.0
 
 [node name="HealthBar" type="HBoxContainer" parent="Camera/UserInterface"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -302.0
+offset_top = -160.0
+offset_right = -262.0
+offset_bottom = -120.0
 script = ExtResource("15_7kvum")
 
 [node name="Heart1" type="AnimatedSprite2D" parent="Camera/UserInterface/HealthBar"]
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_3phr8")
-animation = &"empty"
+animation = &"full"
 script = ExtResource("16_0muk3")
 
 [node name="Heart2" type="AnimatedSprite2D" parent="Camera/UserInterface/HealthBar"]
+position = Vector2(37, 3)
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_3phr8")
-animation = &"empty"
+animation = &"full"
 script = ExtResource("16_0muk3")
 
 [node name="Heart3" type="AnimatedSprite2D" parent="Camera/UserInterface/HealthBar"]
+position = Vector2(74, 1)
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_3phr8")
-animation = &"empty"
+animation = &"full"
 script = ExtResource("16_0muk3")
+
+[node name="BeanBar" type="HBoxContainer" parent="Camera/UserInterface"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("20_bfdv7")
+
+[node name="Bean1" type="AnimatedSprite2D" parent="Camera/UserInterface/BeanBar"]
+position = Vector2(-300, -126)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_dbp1q")
+animation = &"full"
+script = ExtResource("20_1imqh")
+
+[node name="Bean2" type="AnimatedSprite2D" parent="Camera/UserInterface/BeanBar"]
+position = Vector2(-265, -123)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_dbp1q")
+animation = &"full"
+script = ExtResource("20_1imqh")
+
+[node name="Bean3" type="AnimatedSprite2D" parent="Camera/UserInterface/BeanBar"]
+position = Vector2(-230, -124)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_dbp1q")
+animation = &"full"
+script = ExtResource("20_1imqh")
 
 [node name="GIANTORANGEARROW" type="Sprite2D" parent="Camera/UserInterface"]
 position = Vector2(262, -60)
 
 [node name="ArrowTimer" type="Timer" parent="Camera/UserInterface/GIANTORANGEARROW"]
 autostart = true
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Camera/UserInterface"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="Encounter1" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
 position = Vector2(601, 399)
@@ -472,5 +536,7 @@ cameraXLimit = 2448.0
 
 [node name="Graveyard" type="Node2D" parent="."]
 
+[connection signal="beanUsed" from="Player" to="Camera/UserInterface/BeanBar" method="_update_bean"]
+[connection signal="damageTaken" from="Player" to="Camera/UserInterface/HealthBar" method="_update_health"]
 [connection signal="timeout" from="Camera/UserInterface/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
 [connection signal="limitCameraMovement" from="Encounter1" to="Camera" method="changeRightLimit"]

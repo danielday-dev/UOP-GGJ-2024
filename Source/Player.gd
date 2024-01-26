@@ -10,6 +10,7 @@ var currentHealth :float
 @export var numBeans : int = 3;
 
 signal damageTaken(currentHealth)
+signal beanUsed(currentBeans)
 
 enum PlayerState{
 	Grounded,
@@ -63,8 +64,11 @@ func _physics_process(delta):
 			elif dodge:
 				playerState = PlayerState.Dodging
 			elif beans:
-				if numBeans >= 0:
+				if numBeans > 0:
 					numBeans -= 1
+					beanUsed.emit(numBeans)
+					currentHealth += 2
+					damageTaken.emit(currentHealth)
 					playerState = PlayerState.Attacking
 					attackType = AttackType.Beans
 			elif jump:
