@@ -9,6 +9,8 @@ var currentHealth :float
 @export var beansHeal : float = 2;
 @export var numBeans : int = 3;
 
+signal damageTaken(currentHealth)
+
 enum PlayerState{
 	Grounded,
 	Airborne,
@@ -126,6 +128,7 @@ func changeDirection(movement):
 func _on_hitbox_area_entered(area):
 	print("player has been hit uwu")
 	currentHealth -= area.attackDamage
+	damageTaken.emit(currentHealth)
 	print(currentHealth)
 	if currentHealth <= 0:
 		die()

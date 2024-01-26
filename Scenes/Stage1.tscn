@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dinv8peksev2j"]
+[gd_scene load_steps=45 format=3 uid="uid://dinv8peksev2j"]
 
 [ext_resource type="PackedScene" uid="uid://w0vu14krjed8" path="res://Prefabs/Player.tscn" id="1_qlw6n"]
 [ext_resource type="Texture2D" uid="uid://c41p1o6vfwogu" path="res://Resources/Stage/Stage1.png" id="3_cet44"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://csp3txgtghwrj" path="res://Resources/Stage/Stage5Top.png" id="10_m8pxg"]
 [ext_resource type="Texture2D" uid="uid://dk7asgkg011pq" path="res://Resources/UI/UI-Movement.png" id="12_00emt"]
 [ext_resource type="Texture2D" uid="uid://5y24ji8hbnao" path="res://Resources/UI/UI-Other.png" id="13_qb67p"]
+[ext_resource type="Script" path="res://Source/HealthBar.gd" id="15_7kvum"]
+[ext_resource type="Script" path="res://Source/Heart.gd" id="16_0muk3"]
 [ext_resource type="PackedScene" uid="uid://d0qtdulijsgw1" path="res://Prefabs/RestartTimer.tscn" id="16_3wy6l"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p385"]
@@ -141,6 +143,24 @@ b = Vector2(-618, -202)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_cok71"]
 a = Vector2(-555, -257)
 b = Vector2(-333, -294)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3phr8"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"full",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"half",
+"speed": 5.0
+}]
 
 [node name="Main" type="Node2D"]
 
@@ -342,14 +362,6 @@ script = ExtResource("3_lx5w6")
 followTarget = NodePath("../Player")
 followOffset = Vector2(0, -120)
 
-[node name="GIANTORANGEARROW" type="Polygon2D" parent="Camera"]
-position = Vector2(262, -60)
-color = Color(1, 0.498039, 0.152941, 1)
-polygon = PackedVector2Array(1, 0, -1, -24, -67, -25, -67, -85, 5, -84, 6, -102, 50, -29)
-
-[node name="ArrowTimer" type="Timer" parent="Camera/GIANTORANGEARROW"]
-autostart = true
-
 [node name="Bounds" type="StaticBody2D" parent="Camera"]
 position = Vector2(-572, 209)
 collision_layer = 8388609
@@ -369,6 +381,44 @@ one_way_collision = true
 
 [node name="RestartTimer" parent="Camera" instance=ExtResource("16_3wy6l")]
 position = Vector2(-320, -180)
+
+[node name="UserInterface" type="Control" parent="Camera"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="HBoxContainer" parent="Camera/UserInterface"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("15_7kvum")
+
+[node name="Heart1" type="AnimatedSprite2D" parent="Camera/UserInterface/HealthBar"]
+sprite_frames = SubResource("SpriteFrames_3phr8")
+animation = &"empty"
+script = ExtResource("16_0muk3")
+
+[node name="Heart2" type="AnimatedSprite2D" parent="Camera/UserInterface/HealthBar"]
+sprite_frames = SubResource("SpriteFrames_3phr8")
+animation = &"empty"
+script = ExtResource("16_0muk3")
+
+[node name="Heart3" type="AnimatedSprite2D" parent="Camera/UserInterface/HealthBar"]
+sprite_frames = SubResource("SpriteFrames_3phr8")
+animation = &"empty"
+script = ExtResource("16_0muk3")
+
+[node name="GIANTORANGEARROW" type="Sprite2D" parent="Camera/UserInterface"]
+position = Vector2(262, -60)
+
+[node name="ArrowTimer" type="Timer" parent="Camera/UserInterface/GIANTORANGEARROW"]
+autostart = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Camera/UserInterface"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Encounter1" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
 position = Vector2(601, 399)
@@ -422,5 +472,5 @@ cameraXLimit = 2448.0
 
 [node name="Graveyard" type="Node2D" parent="."]
 
-[connection signal="timeout" from="Camera/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
+[connection signal="timeout" from="Camera/UserInterface/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
 [connection signal="limitCameraMovement" from="Encounter1" to="Camera" method="changeRightLimit"]
