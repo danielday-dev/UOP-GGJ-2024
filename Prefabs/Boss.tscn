@@ -87,12 +87,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_du2j2"]
 size = Vector2(202, 32)
 
-[node name="Enemy" instance=ExtResource("1_jvrxo")]
+[node name="Boss" instance=ExtResource("1_jvrxo")]
 Attacks = Array[ExtResource("2_6tytd")]([SubResource("Resource_yqg0l")])
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2(81, -79)
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_m6hb6")
 animation = &"Attack"
 
