@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://3lpebkqp81vt"]
+
+[ext_resource type="Texture2D" uid="uid://koxlelbgrvg" path="res://Resources/WinScreen/WS-Thanks.png" id="1_0dyc0"]
+[ext_resource type="Texture2D" uid="uid://du68620r48k7k" path="res://Resources/WinScreen/WS-UnpressedMenuButton.png" id="2_bt707"]
+[ext_resource type="Texture2D" uid="uid://cwl3kr2cnp3tg" path="res://Resources/WinScreen/WS-MenuButton.png" id="2_eyy2d"]
+[ext_resource type="Script" path="res://Source/WinButton.gd" id="4_hu4vk"]
+
+[node name="WinScreen" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.709804, 0.670588, 0.635294, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 232.0
+offset_top = 72.0
+offset_right = 861.0
+offset_bottom = 632.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_0dyc0")
+
+[node name="MenuButton" type="TextureButton" parent="."]
+offset_left = 248.0
+offset_top = 184.0
+offset_right = 834.0
+offset_bottom = 412.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("2_bt707")
+texture_pressed = ExtResource("2_eyy2d")
+script = ExtResource("4_hu4vk")
+
+[connection signal="pressed" from="MenuButton" to="MenuButton" method="_onPressed"]
