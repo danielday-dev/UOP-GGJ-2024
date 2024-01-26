@@ -162,10 +162,13 @@ func _on_hitbox_area_entered(area):
 		if currentHealth <= 0:
 			die()
 
+func die_defer():
+	get_tree().change_scene_to_file("res://Scenes/LoseScreen.tscn");
+	
+
 func die():
 	playerState = PlayerState.Dead
-	get_tree().change_scene_to_file("res://Scenes/loseScreen.tscn");
-	#get_tree().call_deferred("change_scene_to_file", "res://Scenes/loseScreen.tscn")
+	call_deferred("die_defer")
 
 func _on_win_game_body_entered(body):
 	get_tree().change_scene_to_file("res://Scenes/WinScreen.tscn");
