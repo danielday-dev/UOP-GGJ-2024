@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://xntvacia6rq2"]
+[gd_scene load_steps=5 format=3 uid="uid://7g4piaxehrk2"]
 
 [ext_resource type="Texture2D" uid="uid://du68620r48k7k" path="res://Resources/WinScreen/WS-UnpressedMenuButton.png" id="1_t2alf"]
 [ext_resource type="Texture2D" uid="uid://cwl3kr2cnp3tg" path="res://Resources/WinScreen/WS-MenuButton.png" id="2_f6nlp"]
@@ -37,6 +37,7 @@ offset_bottom = 178.0
 theme_override_colors/font_color = Color(0.2, 0.192157, 0.184314, 1)
 theme_override_fonts/font = ExtResource("4_6rgpu")
 theme_override_font_sizes/font_size = 100
-text = "You lose"
+text = "You lose.
+"
 
 [connection signal="pressed" from="MenuButton" to="MenuButton" method="_onPressed"]
