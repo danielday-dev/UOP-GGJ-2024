@@ -79,13 +79,16 @@ func _physics_process(delta):
 			setAnimation(activeAttack.animation)
 			
 			if animationEnded():
-				enemyState = activeAttack.nextState as EnemyState;
+				if (activeAttack.cooldown):
+					enemyState = EnemyState.Cooldown
+				else:
+					enemyState = activeAttack.nextState as EnemyState;
 				(get_node(activeAttack.hurtboxName) as Area2D).get_child(0).disabled = true
 				
 		EnemyState.Cooldown:
 			setAnimation(activeAttack.animation + "Cool");
 			if animationEnded():
-				enemyState = EnemyState.Grounded
+				enemyState = activeAttack.nextState as EnemyState;
 				
 		EnemyState.Stunned:
 			$EnemeyHitbox/HitboxCollider.disabled = true

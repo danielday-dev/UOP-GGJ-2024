@@ -55,7 +55,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_itfpg")
 }],
-"loop": true,
+"loop": false,
 "name": &"AttackCool",
 "speed": 0.5
 }, {
@@ -94,7 +94,7 @@ Attacks = Array[ExtResource("2_6tytd")]([SubResource("Resource_yqg0l")])
 position = Vector2(81, -79)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_m6hb6")
-animation = &"Attack"
+animation = &"AttackCool"
 
 [node name="HitboxCollider" parent="EnemyHitbox" index="0"]
 position = Vector2(0, -23)
