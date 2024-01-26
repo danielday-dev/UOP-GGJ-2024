@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[gd_scene load_steps=46 format=3 uid="uid://dinv8peksev2j"]
-=======
 [gd_scene load_steps=56 format=3 uid="uid://dinv8peksev2j"]
->>>>>>> 48735ad52ec8489fac74d406d41e459f6e67fc1e
 
 [ext_resource type="PackedScene" uid="uid://w0vu14krjed8" path="res://Prefabs/Player.tscn" id="1_qlw6n"]
 [ext_resource type="Texture2D" uid="uid://c41p1o6vfwogu" path="res://Resources/Stage/Stage1.png" id="3_cet44"]
@@ -22,9 +18,6 @@
 [ext_resource type="Script" path="res://Source/HealthBar.gd" id="15_7kvum"]
 [ext_resource type="Script" path="res://Source/Heart.gd" id="16_0muk3"]
 [ext_resource type="PackedScene" uid="uid://d0qtdulijsgw1" path="res://Prefabs/RestartTimer.tscn" id="16_3wy6l"]
-<<<<<<< HEAD
-[ext_resource type="PackedScene" uid="uid://bgnu78cu205cv" path="res://Prefabs/Boss.tscn" id="19_v3jxj"]
-=======
 [ext_resource type="Texture2D" uid="uid://cq5nlkslctfrp" path="res://Resources/UI/UI-HeartEmpty.png" id="16_gdh58"]
 [ext_resource type="Texture2D" uid="uid://ck4ggx3xft5qe" path="res://Resources/UI/UI-HeartFull.png" id="17_468l2"]
 [ext_resource type="Texture2D" uid="uid://cbtkofpmrqpmv" path="res://Resources/UI/UI-HeartHalf.png" id="18_wp7r5"]
@@ -34,7 +27,6 @@
 [ext_resource type="Texture2D" uid="uid://ch2x5st0gdl20" path="res://Resources/UI/UI-BeanFull.png" id="21_0tu0x"]
 [ext_resource type="Texture2D" uid="uid://dpxg7h3rjtmia" path="res://Resources/UI/UI-BigArrow.png" id="24_unyxv"]
 [ext_resource type="Script" path="res://Source/Arrow.gd" id="25_cl7nh"]
->>>>>>> 48735ad52ec8489fac74d406d41e459f6e67fc1e
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p385"]
 distance = -0.999969
