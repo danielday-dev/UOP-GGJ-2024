@@ -556,6 +556,7 @@ position = Vector2(304, 40)
 position = Vector2(-336, 80)
 
 [node name="Encounter4" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
+visible = false
 position = Vector2(2089, 302)
 graveyard = NodePath("../Graveyard")
 cameraXLimit = 2448.0
@@ -564,7 +565,7 @@ cameraXLimit = 2448.0
 
 [node name="Boss" parent="Encounter4/Wave1" instance=ExtResource("28_d3gsb")]
 position = Vector2(159, 26)
-maxHealth = 7.0
+maxHealth = 12.0
 
 [node name="Graveyard" type="Node2D" parent="."]
 
