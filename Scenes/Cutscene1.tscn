@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://crctaa1eh4ave"]
+[gd_scene load_steps=15 format=3 uid="uid://crctaa1eh4ave"]
 
 [ext_resource type="Texture2D" uid="uid://d125ryw0b2wbj" path="res://Resources/Cutscene/ThroneroomJester.png" id="1_0sxoe"]
 [ext_resource type="Script" path="res://Source/Cutscene.gd" id="1_7v0xj"]
 [ext_resource type="Script" path="res://Resources/Cutscene/CutsceneInformation.gd" id="2_igmmf"]
 [ext_resource type="Texture2D" uid="uid://da5mujdbnc0j4" path="res://Resources/Cutscene/ThroneroomKnight.png" id="3_efta1"]
+[ext_resource type="Texture2D" uid="uid://c8jqtm6ynpmb2" path="res://Resources/Cutscene/MakeMeLaugh.png" id="5_lepmp"]
 
 [sub_resource type="Resource" id="Resource_wg8hv"]
 script = ExtResource("2_igmmf")
@@ -69,11 +70,19 @@ targetTo = Vector2(0.5, 0.45)
 cutsceneTime = 4.0
 zoomLevel = 0.25
 
+[sub_resource type="Resource" id="Resource_ndod6"]
+script = ExtResource("2_igmmf")
+targetNode = NodePath("../Make Me Laugh")
+targetFrom = Vector2(0.53, 0.45)
+targetTo = Vector2(0.53, 0.45)
+cutsceneTime = 4.0
+zoomLevel = 0.381
+
 [node name="Cutscene1" type="Node2D"]
 
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("1_7v0xj")
-cutscenes = Array[ExtResource("2_igmmf")]([SubResource("Resource_wg8hv"), SubResource("Resource_b504s"), SubResource("Resource_wd6vn"), SubResource("Resource_ipnax"), SubResource("Resource_ypipo"), SubResource("Resource_2qlfm"), SubResource("Resource_ocw1j"), SubResource("Resource_exosh")])
+cutscenes = Array[ExtResource("2_igmmf")]([SubResource("Resource_wg8hv"), SubResource("Resource_b504s"), SubResource("Resource_wd6vn"), SubResource("Resource_ipnax"), SubResource("Resource_ypipo"), SubResource("Resource_2qlfm"), SubResource("Resource_ocw1j"), SubResource("Resource_exosh"), SubResource("Resource_ndod6")])
 nextScene = "res://Scenes/Stage1.tscn"
 
 [node name="Jester" type="Sprite2D" parent="."]
@@ -85,4 +94,10 @@ centered = false
 position = Vector2(0, 360)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_efta1")
+centered = false
+
+[node name="Make Me Laugh" type="Sprite2D" parent="."]
+position = Vector2(0, 720)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_lepmp")
 centered = false
