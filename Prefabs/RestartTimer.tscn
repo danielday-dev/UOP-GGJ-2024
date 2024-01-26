@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0qtdulijsgw1"]
+
+[ext_resource type="Script" path="res://Source/RestartTimer.gd" id="1_niiud"]
+[ext_resource type="FontFile" uid="uid://g03vob1jdmq5" path="res://Resources/Maki.ttf" id="2_bhctn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5qsph"]
+bg_color = Color(1, 0, 0.266667, 0.478431)
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_niiud")
+
+[node name="RestartTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Panel" type="PanelContainer" parent="."]
+offset_left = 110.0
+offset_right = 510.0
+offset_bottom = 60.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5qsph")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bhctn")
+theme_override_font_sizes/font_size = 56
+text = "Restart Timer Goes Here."
+horizontal_alignment = 1
+
+[connection signal="timeout" from="RestartTimer" to="." method="_onTimeout"]
