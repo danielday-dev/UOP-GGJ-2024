@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://xntvacia6rq2"]
+
+[ext_resource type="Texture2D" uid="uid://du68620r48k7k" path="res://Resources/WinScreen/WS-UnpressedMenuButton.png" id="1_t2alf"]
+[ext_resource type="Texture2D" uid="uid://cwl3kr2cnp3tg" path="res://Resources/WinScreen/WS-MenuButton.png" id="2_f6nlp"]
+[ext_resource type="Script" path="res://Source/WinButton.gd" id="3_hc0gy"]
+[ext_resource type="FontFile" uid="uid://g03vob1jdmq5" path="res://Resources/Maki.ttf" id="4_6rgpu"]
+
+[node name="LoseScreen" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.709804, 0.670588, 0.635294, 1)
+
+[node name="MenuButton" type="TextureButton" parent="."]
+offset_left = 248.0
+offset_top = 184.0
+offset_right = 834.0
+offset_bottom = 412.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("1_t2alf")
+texture_pressed = ExtResource("2_f6nlp")
+script = ExtResource("3_hc0gy")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = 240.0
+offset_top = 128.0
+offset_right = 382.0
+offset_bottom = 178.0
+theme_override_colors/font_color = Color(0.2, 0.192157, 0.184314, 1)
+theme_override_fonts/font = ExtResource("4_6rgpu")
+theme_override_font_sizes/font_size = 100
+text = "You lose"
+
+[connection signal="pressed" from="MenuButton" to="MenuButton" method="_onPressed"]

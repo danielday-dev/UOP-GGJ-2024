@@ -34,5 +34,6 @@ scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("2_bt707")
 texture_pressed = ExtResource("2_eyy2d")
 script = ExtResource("4_hu4vk")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="MenuButton" to="MenuButton" method="_onPressed"]
