@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dinv8peksev2j"]
+[gd_scene load_steps=55 format=3 uid="uid://dinv8peksev2j"]
 
 [ext_resource type="PackedScene" uid="uid://w0vu14krjed8" path="res://Prefabs/Player.tscn" id="1_qlw6n"]
 [ext_resource type="Texture2D" uid="uid://c41p1o6vfwogu" path="res://Resources/Stage/Stage1.png" id="3_cet44"]
@@ -25,6 +25,8 @@
 [ext_resource type="Script" path="res://Source/BeanBar.gd" id="20_bfdv7"]
 [ext_resource type="Texture2D" uid="uid://uy8ke61714fo" path="res://Resources/UI/UI-BeanEmpty.png" id="20_wc2ep"]
 [ext_resource type="Texture2D" uid="uid://ch2x5st0gdl20" path="res://Resources/UI/UI-BeanFull.png" id="21_0tu0x"]
+[ext_resource type="Texture2D" uid="uid://dpxg7h3rjtmia" path="res://Resources/UI/UI-BigArrow.png" id="24_unyxv"]
+[ext_resource type="Script" path="res://Source/Arrow.gd" id="25_cl7nh"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p385"]
 distance = -0.999969
@@ -479,7 +481,10 @@ animation = &"full"
 script = ExtResource("20_1imqh")
 
 [node name="GIANTORANGEARROW" type="Sprite2D" parent="Camera/UserInterface"]
-position = Vector2(262, -60)
+position = Vector2(246, -95)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24_unyxv")
+script = ExtResource("25_cl7nh")
 
 [node name="ArrowTimer" type="Timer" parent="Camera/UserInterface/GIANTORANGEARROW"]
 autostart = true
@@ -514,7 +519,11 @@ cameraXLimit = 1631.0
 
 [node name="Wave1" type="Node2D" parent="Encounter2"]
 
+[node name="Slime" parent="Encounter2/Wave1" instance=ExtResource("5_6vdjg")]
+
 [node name="Wave2" type="Node2D" parent="Encounter2"]
+
+[node name="Slime" parent="Encounter2/Wave2" instance=ExtResource("5_6vdjg")]
 
 [node name="Encounter3" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
 position = Vector2(1468, 415)
@@ -522,6 +531,8 @@ graveyard = NodePath("../Graveyard")
 cameraXLimit = 2247.0
 
 [node name="Wave1" type="Node2D" parent="Encounter3"]
+
+[node name="Slime" parent="Encounter3/Wave1" instance=ExtResource("5_6vdjg")]
 
 [node name="Encounter4" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
 position = Vector2(2089, 302)
@@ -532,11 +543,24 @@ cameraXLimit = 2448.0
 
 [node name="Wave2" type="Node2D" parent="Encounter4"]
 
+[node name="Slime" parent="Encounter4/Wave2" instance=ExtResource("5_6vdjg")]
+
 [node name="Wave3" type="Node2D" parent="Encounter4"]
 
 [node name="Graveyard" type="Node2D" parent="."]
 
 [connection signal="beanUsed" from="Player" to="Camera/UserInterface/BeanBar" method="_update_bean"]
 [connection signal="damageTaken" from="Player" to="Camera/UserInterface/HealthBar" method="_update_health"]
-[connection signal="timeout" from="Camera/UserInterface/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
+[connection signal="timeout" from="Camera/UserInterface/GIANTORANGEARROW/ArrowTimer" to="Camera/UserInterface/GIANTORANGEARROW" method="_on_arrow_timer_timeout"]
+[connection signal="encounterEnded" from="Encounter1" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterEnd"]
+[connection signal="encounterStarted" from="Encounter1" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterStart"]
 [connection signal="limitCameraMovement" from="Encounter1" to="Camera" method="changeRightLimit"]
+[connection signal="encounterEnded" from="Encounter2" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterEnd"]
+[connection signal="encounterStarted" from="Encounter2" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterStart"]
+[connection signal="limitCameraMovement" from="Encounter2" to="Camera" method="changeRightLimit"]
+[connection signal="encounterEnded" from="Encounter3" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterEnd"]
+[connection signal="encounterStarted" from="Encounter3" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterStart"]
+[connection signal="limitCameraMovement" from="Encounter3" to="Camera" method="changeRightLimit"]
+[connection signal="encounterEnded" from="Encounter4" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterEnd"]
+[connection signal="encounterStarted" from="Encounter4" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterStart"]
+[connection signal="limitCameraMovement" from="Encounter4" to="Camera" method="changeRightLimit"]

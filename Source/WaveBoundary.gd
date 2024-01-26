@@ -5,7 +5,9 @@ extends Area2D
 @export var cameraXLimit : float = 0
 
 signal limitCameraMovement(cameraXLimit)
-
+signal encounterStarted
+var encounterStartedEmitted : bool = false;
+signal encounterEnded
 
 var children
 # Called when the node enters the scene tree for the first time.
@@ -25,10 +27,12 @@ func _process(delta):
 	pass
 
 func _on_body_entered(body):
-	limitCameraMovement.emit(cameraXLimit)
-	var tim = get_child(1)
-	tim.start()
-	print("nice body (im picking you up)")
+	if !encounterStartedEmitted:
+		var tim = get_child(1)
+		tim.start()
+		encounterStarted.emit()
+		encounterStartedEmitted = true
+		print("nice body (im picking you up)")
 
 func _on_mob_spawn_timer_timeout():
 	for child in children:
@@ -40,6 +44,8 @@ func _on_mob_spawn_timer_timeout():
 
 func playerHasDefeatedEnemies():
 	limitCameraMovement.emit(cameraXLimit)
+	encounterEnded.emit()
+	
 			
 func checkAllWavesClear():
 	for child in children:
@@ -49,4 +55,4 @@ func checkAllWavesClear():
 
 func enemyHasDied(body):
 	body.call_deferred("reparent", graveyard)
-	checkAllWavesClear()
+	call_deferred("checkAllWavesClear")
