@@ -89,6 +89,7 @@ size = Vector2(202, 32)
 
 [node name="Boss" instance=ExtResource("1_jvrxo")]
 Attacks = Array[ExtResource("2_6tytd")]([SubResource("Resource_yqg0l")])
+minimumDistanceFromPlayer = 50
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2(81, -79)
