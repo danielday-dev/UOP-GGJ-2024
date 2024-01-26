@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=46 format=3 uid="uid://dinv8peksev2j"]
+=======
+[gd_scene load_steps=56 format=3 uid="uid://dinv8peksev2j"]
+>>>>>>> 48735ad52ec8489fac74d406d41e459f6e67fc1e
 
 [ext_resource type="PackedScene" uid="uid://w0vu14krjed8" path="res://Prefabs/Player.tscn" id="1_qlw6n"]
 [ext_resource type="Texture2D" uid="uid://c41p1o6vfwogu" path="res://Resources/Stage/Stage1.png" id="3_cet44"]
@@ -18,7 +22,19 @@
 [ext_resource type="Script" path="res://Source/HealthBar.gd" id="15_7kvum"]
 [ext_resource type="Script" path="res://Source/Heart.gd" id="16_0muk3"]
 [ext_resource type="PackedScene" uid="uid://d0qtdulijsgw1" path="res://Prefabs/RestartTimer.tscn" id="16_3wy6l"]
+<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://bgnu78cu205cv" path="res://Prefabs/Boss.tscn" id="19_v3jxj"]
+=======
+[ext_resource type="Texture2D" uid="uid://cq5nlkslctfrp" path="res://Resources/UI/UI-HeartEmpty.png" id="16_gdh58"]
+[ext_resource type="Texture2D" uid="uid://ck4ggx3xft5qe" path="res://Resources/UI/UI-HeartFull.png" id="17_468l2"]
+[ext_resource type="Texture2D" uid="uid://cbtkofpmrqpmv" path="res://Resources/UI/UI-HeartHalf.png" id="18_wp7r5"]
+[ext_resource type="Script" path="res://Source/Bean.gd" id="20_1imqh"]
+[ext_resource type="Script" path="res://Source/BeanBar.gd" id="20_bfdv7"]
+[ext_resource type="Texture2D" uid="uid://uy8ke61714fo" path="res://Resources/UI/UI-BeanEmpty.png" id="20_wc2ep"]
+[ext_resource type="Texture2D" uid="uid://ch2x5st0gdl20" path="res://Resources/UI/UI-BeanFull.png" id="21_0tu0x"]
+[ext_resource type="Texture2D" uid="uid://dpxg7h3rjtmia" path="res://Resources/UI/UI-BigArrow.png" id="24_unyxv"]
+[ext_resource type="Script" path="res://Source/Arrow.gd" id="25_cl7nh"]
+>>>>>>> 48735ad52ec8489fac74d406d41e459f6e67fc1e
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p385"]
 distance = -0.999969
@@ -145,21 +161,52 @@ b = Vector2(-618, -202)
 a = Vector2(-555, -257)
 b = Vector2(-333, -294)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01q2d"]
+size = Vector2(146, 74)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_3phr8"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_gdh58")
+}],
 "loop": true,
 "name": &"empty",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_468l2")
+}],
 "loop": true,
 "name": &"full",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_wp7r5")
+}],
 "loop": true,
 "name": &"half",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dbp1q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_wc2ep")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_0tu0x")
+}],
+"loop": true,
+"name": &"full",
 "speed": 5.0
 }]
 
@@ -168,6 +215,8 @@ animations = [{
 [node name="Player" parent="." instance=ExtResource("1_qlw6n")]
 z_as_relative = false
 position = Vector2(184, 288)
+collision_layer = 8389122
+collision_mask = 8389121
 floor_max_angle = 1.45211
 
 [node name="Environment" type="StaticBody2D" parent="."]
@@ -352,6 +401,14 @@ shape = SubResource("SegmentShape2D_g8ehi")
 position = Vector2(563.4, 561)
 shape = SubResource("SegmentShape2D_cok71")
 
+[node name="WinGame" type="Area2D" parent="Environment"]
+collision_layer = 512
+collision_mask = 512
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Environment/WinGame"]
+position = Vector2(2415, 301)
+shape = SubResource("RectangleShape2D_01q2d")
+
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("followTarget")]
 position = Vector2(322, 239)
 limit_left = 0
@@ -391,35 +448,67 @@ offset_bottom = 40.0
 
 [node name="HealthBar" type="HBoxContainer" parent="Camera/UserInterface"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -302.0
+offset_top = -160.0
+offset_right = -262.0
+offset_bottom = -120.0
 script = ExtResource("15_7kvum")
 
 [node name="Heart1" type="AnimatedSprite2D" parent="Camera/UserInterface/HealthBar"]
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_3phr8")
-animation = &"empty"
+animation = &"full"
 script = ExtResource("16_0muk3")
 
 [node name="Heart2" type="AnimatedSprite2D" parent="Camera/UserInterface/HealthBar"]
+position = Vector2(37, 3)
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_3phr8")
-animation = &"empty"
+animation = &"full"
 script = ExtResource("16_0muk3")
 
 [node name="Heart3" type="AnimatedSprite2D" parent="Camera/UserInterface/HealthBar"]
+position = Vector2(74, 1)
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_3phr8")
-animation = &"empty"
+animation = &"full"
 script = ExtResource("16_0muk3")
 
-[node name="GIANTORANGEARROW" type="Sprite2D" parent="Camera/UserInterface"]
-position = Vector2(262, -60)
-
-[node name="ArrowTimer" type="Timer" parent="Camera/UserInterface/GIANTORANGEARROW"]
-autostart = true
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Camera/UserInterface"]
+[node name="BeanBar" type="HBoxContainer" parent="Camera/UserInterface"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("20_bfdv7")
+
+[node name="Bean1" type="AnimatedSprite2D" parent="Camera/UserInterface/BeanBar"]
+position = Vector2(-300, -126)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_dbp1q")
+animation = &"full"
+script = ExtResource("20_1imqh")
+
+[node name="Bean2" type="AnimatedSprite2D" parent="Camera/UserInterface/BeanBar"]
+position = Vector2(-265, -123)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_dbp1q")
+animation = &"full"
+script = ExtResource("20_1imqh")
+
+[node name="Bean3" type="AnimatedSprite2D" parent="Camera/UserInterface/BeanBar"]
+position = Vector2(-230, -124)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_dbp1q")
+animation = &"full"
+script = ExtResource("20_1imqh")
+
+[node name="GIANTORANGEARROW" type="Sprite2D" parent="Camera/UserInterface"]
+position = Vector2(246, -95)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24_unyxv")
+script = ExtResource("25_cl7nh")
+
+[node name="ArrowTimer" type="Timer" parent="Camera/UserInterface/GIANTORANGEARROW"]
+autostart = true
 
 [node name="Encounter1" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
 position = Vector2(601, 399)
@@ -451,7 +540,11 @@ cameraXLimit = 1631.0
 
 [node name="Wave1" type="Node2D" parent="Encounter2"]
 
+[node name="Slime" parent="Encounter2/Wave1" instance=ExtResource("5_6vdjg")]
+
 [node name="Wave2" type="Node2D" parent="Encounter2"]
+
+[node name="Slime" parent="Encounter2/Wave2" instance=ExtResource("5_6vdjg")]
 
 [node name="Encounter3" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
 position = Vector2(1468, 415)
@@ -459,6 +552,8 @@ graveyard = NodePath("../Graveyard")
 cameraXLimit = 2247.0
 
 [node name="Wave1" type="Node2D" parent="Encounter3"]
+
+[node name="Slime" parent="Encounter3/Wave1" instance=ExtResource("5_6vdjg")]
 
 [node name="Encounter4" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
 position = Vector2(2089, 302)
@@ -469,12 +564,32 @@ cameraXLimit = 2448.0
 
 [node name="Wave2" type="Node2D" parent="Encounter4"]
 
+[node name="Slime" parent="Encounter4/Wave2" instance=ExtResource("5_6vdjg")]
+
 [node name="Wave3" type="Node2D" parent="Encounter4"]
 
 [node name="Graveyard" type="Node2D" parent="."]
 
+<<<<<<< HEAD
 [node name="Enemy" parent="." instance=ExtResource("19_v3jxj")]
 position = Vector2(395, 280)
 
 [connection signal="timeout" from="Camera/UserInterface/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
+=======
+[connection signal="beanUsed" from="Player" to="Camera/UserInterface/BeanBar" method="_update_bean"]
+[connection signal="damageTaken" from="Player" to="Camera/UserInterface/HealthBar" method="_update_health"]
+[connection signal="body_entered" from="Environment/WinGame" to="Player" method="_on_win_game_body_entered"]
+[connection signal="timeout" from="Camera/UserInterface/GIANTORANGEARROW/ArrowTimer" to="Camera/UserInterface/GIANTORANGEARROW" method="_on_arrow_timer_timeout"]
+[connection signal="encounterEnded" from="Encounter1" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterEnd"]
+[connection signal="encounterStarted" from="Encounter1" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterStart"]
+>>>>>>> 48735ad52ec8489fac74d406d41e459f6e67fc1e
 [connection signal="limitCameraMovement" from="Encounter1" to="Camera" method="changeRightLimit"]
+[connection signal="encounterEnded" from="Encounter2" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterEnd"]
+[connection signal="encounterStarted" from="Encounter2" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterStart"]
+[connection signal="limitCameraMovement" from="Encounter2" to="Camera" method="changeRightLimit"]
+[connection signal="encounterEnded" from="Encounter3" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterEnd"]
+[connection signal="encounterStarted" from="Encounter3" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterStart"]
+[connection signal="limitCameraMovement" from="Encounter3" to="Camera" method="changeRightLimit"]
+[connection signal="encounterEnded" from="Encounter4" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterEnd"]
+[connection signal="encounterStarted" from="Encounter4" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterStart"]
+[connection signal="limitCameraMovement" from="Encounter4" to="Camera" method="changeRightLimit"]

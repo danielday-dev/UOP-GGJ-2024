@@ -10,6 +10,7 @@ var currentHealth :float
 @export var numBeans : int = 3;
 
 signal damageTaken(currentHealth)
+signal beanUsed(currentBeans)
 
 var lastHitTimer = 0;
 
@@ -72,8 +73,11 @@ func _physics_process(delta):
 			elif dodge:
 				playerState = PlayerState.Dodging
 			elif beans:
-				if numBeans >= 0:
+				if numBeans > 0:
 					numBeans -= 1
+					beanUsed.emit(numBeans)
+					currentHealth += 2
+					damageTaken.emit(currentHealth)
 					playerState = PlayerState.Attacking
 					attackType = AttackType.Beans
 			elif jump:
@@ -158,3 +162,8 @@ func _on_hitbox_area_entered(area):
 
 func die():
 	playerState = PlayerState.Dead
+	get_tree().change_scene_to_file("res://Scenes/loseScreen.tscn");
+
+
+func _on_win_game_body_entered(body):
+	get_tree().change_scene_to_file("res://Scenes/WinScreen.tscn");
