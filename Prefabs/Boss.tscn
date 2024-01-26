@@ -15,7 +15,7 @@
 
 [sub_resource type="Resource" id="Resource_yqg0l"]
 script = ExtResource("2_6tytd")
-range = 100.0
+range = 150.0
 speedMulitplier = 0.0
 animation = &"Attack"
 priority = 0.0
@@ -97,13 +97,13 @@ sprite_frames = SubResource("SpriteFrames_m6hb6")
 animation = &"Attack"
 
 [node name="HitboxCollider" parent="EnemyHitbox" index="0"]
-position = Vector2(3, -17)
+position = Vector2(0, -23)
 
 [node name="Attack" type="Area2D" parent="." index="3"]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("6_hposh")
-attackDamage = 1
+attackDamage = 2
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="Attack" index="0"]
 position = Vector2(101, 0)

@@ -73,10 +73,10 @@ func _physics_process(delta):
 			elif dodge:
 				playerState = PlayerState.Dodging
 			elif beans:
-				if numBeans > 0:
+				if numBeans > 0 && currentHealth < maxHealth:
 					numBeans -= 1
 					beanUsed.emit(numBeans)
-					currentHealth += 2
+					currentHealth = clamp(currentHealth + 2, 0, maxHealth);
 					damageTaken.emit(currentHealth)
 					playerState = PlayerState.Attacking
 					attackType = AttackType.Beans
@@ -88,6 +88,8 @@ func _physics_process(delta):
 			$Hitbox/HitboxCollider.disabled = true
 			moveMultiplier = 1.5
 			setAnimation("dodge")
+			
+			changeDirection(movement)
 			
 			if animationEnded():
 				playerState = PlayerState.Grounded
