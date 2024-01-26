@@ -4,6 +4,8 @@ extends Area2D
 
 @export var cameraXLimit : float = 0
 
+@export var hideEnemies : bool = true;
+
 signal limitCameraMovement(cameraXLimit)
 signal encounterStarted
 var encounterStartedEmitted : bool = false;
