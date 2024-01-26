@@ -140,3 +140,7 @@ func _on_hitbox_area_entered(area):
 func die():
 	print("easy mode is now available")
 	playerState = PlayerState.Dead
+
+
+func _on_win_game_body_entered(body):
+	get_tree().change_scene_to_file("res://Scenes/WinScreen.tscn");

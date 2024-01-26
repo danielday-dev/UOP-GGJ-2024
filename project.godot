@@ -76,6 +76,7 @@ start={
 
 2d_physics/layer_6="Player Hitbox and Enemy Hurtbox"
 2d_physics/layer_8="Player Hurtbox and Enemy Hitbox"
+2d_physics/layer_10="Stage change"
 2d_physics/layer_24="camera"
 
 [rendering]
