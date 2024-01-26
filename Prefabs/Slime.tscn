@@ -16,7 +16,7 @@
 
 [sub_resource type="Resource" id="Resource_mat2o"]
 script = ExtResource("2_vai6y")
-range = 100.0
+range = 40.0
 speedMulitplier = 0.2
 animation = &"yom"
 priority = 0.0

@@ -17,12 +17,11 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ac44"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y3ru7"]
-size = Vector2(20, 36)
+size = Vector2(36, 50)
 
 [node name="Enemy" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 0
-collision_mask = 0
 script = ExtResource("1_clj3o")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
