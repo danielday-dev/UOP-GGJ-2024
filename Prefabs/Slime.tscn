@@ -93,6 +93,7 @@ size = Vector2(72, 20)
 
 [node name="Slime" instance=ExtResource("1_ox14j")]
 Attacks = Array[ExtResource("2_vai6y")]([SubResource("Resource_mat2o")])
+minimumDistanceFromPlayer = 30
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2(73, -79)
