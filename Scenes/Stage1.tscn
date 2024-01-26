@@ -526,12 +526,12 @@ cameraXLimit = 1631.0
 [node name="Wave1" type="Node2D" parent="Encounter2"]
 
 [node name="Slime" parent="Encounter2/Wave1" instance=ExtResource("5_6vdjg")]
-position = Vector2(-364, 62)
+position = Vector2(220, 38)
 
 [node name="Wave2" type="Node2D" parent="Encounter2"]
 
 [node name="Slime" parent="Encounter2/Wave2" instance=ExtResource("5_6vdjg")]
-position = Vector2(260, 70)
+position = Vector2(220, 86)
 
 [node name="Encounter3" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
 position = Vector2(1468, 415)
@@ -544,7 +544,7 @@ cameraXLimit = 2247.0
 position = Vector2(196, -39)
 
 [node name="Slime2" parent="Encounter3/Wave1" instance=ExtResource("5_6vdjg")]
-position = Vector2(-156, -15)
+position = Vector2(364, -111)
 
 [node name="Wave2" type="Node2D" parent="Encounter3"]
 position = Vector2(-44, -151)
@@ -553,10 +553,9 @@ position = Vector2(-44, -151)
 position = Vector2(304, 40)
 
 [node name="Slime2" parent="Encounter3/Wave2" instance=ExtResource("5_6vdjg")]
-position = Vector2(-336, 80)
+position = Vector2(368, 112)
 
 [node name="Encounter4" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
-visible = false
 position = Vector2(2089, 302)
 graveyard = NodePath("../Graveyard")
 cameraXLimit = 2448.0
@@ -564,7 +563,7 @@ cameraXLimit = 2448.0
 [node name="Wave1" type="Node2D" parent="Encounter4"]
 
 [node name="Boss" parent="Encounter4/Wave1" instance=ExtResource("28_d3gsb")]
-position = Vector2(159, 26)
+position = Vector2(135, 26)
 maxHealth = 12.0
 
 [node name="Graveyard" type="Node2D" parent="."]
