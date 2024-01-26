@@ -21,6 +21,8 @@ enum EnemyState{
 	Stunned,
 	Prone,
 	Dead,
+	Anticipation,
+	Cooldown,
 }
 var enemyState : EnemyState = EnemyState.Grounded
 
@@ -60,11 +62,17 @@ func _physics_process(delta):
 			else:
 				for attack in Attacks:
 					if distanceFromPlayer <= attack.range:
-						enemyState = EnemyState.Attacking
+						if (attack.anticipate):
+							enemyState = EnemyState.Anticipation
+						else:
+							enemyState = EnemyState.Attacking
 						activeAttack = attack;
 						break
-		EnemyState.Airborne:
-			pass
+		EnemyState.Anticipation:
+			setAnimation(activeAttack.animation + "Anti");
+			if animationEnded():
+				enemyState = EnemyState.Attacking
+				
 		EnemyState.Attacking:
 			(get_node(activeAttack.hurtboxName) as Area2D).get_child(0).disabled = false;
 			moveMultiplier = activeAttack.speedMulitplier;
@@ -74,8 +82,19 @@ func _physics_process(delta):
 				enemyState = activeAttack.nextState as EnemyState;
 				(get_node(activeAttack.hurtboxName) as Area2D).get_child(0).disabled = true
 				
+		EnemyState.Cooldown:
+			setAnimation(activeAttack.animation + "Cool");
+			if animationEnded():
+				enemyState = EnemyState.Grounded
+				
 		EnemyState.Stunned:
-			pass
+			$EnemeyHitbox/HitboxCollider.disabled = true
+			moveMultiplier = 0
+			setAnimation("stunned")
+			
+			if animationEnded():
+				enemyState = EnemyState.Grounded
+				$EnemeyHitbox/HitboxCollider.disabled = false
 		EnemyState.Prone:
 			pass
 	
@@ -114,6 +133,7 @@ func die():
 			child.get_child(0).set_deferred("disabled", true)
 	set_physics_process(false)
 	set_process(false)
+	setAnimation("dead")
 
 func _on_enemy_hitbox_area_entered(area):
 	print("steve the slime has had his ass slapped")

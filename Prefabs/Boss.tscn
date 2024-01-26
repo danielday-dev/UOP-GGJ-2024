@@ -1,0 +1,111 @@
+[gd_scene load_steps=16 format=3 uid="uid://bgnu78cu205cv"]
+
+[ext_resource type="PackedScene" uid="uid://ymj72rk301d8" path="res://Prefabs/Enemy.tscn" id="1_jvrxo"]
+[ext_resource type="Script" path="res://Resources/AttackInfo.gd" id="2_6tytd"]
+[ext_resource type="Texture2D" uid="uid://be8f3awgsduxy" path="res://Resources/Boss/Boss_Dead.png" id="2_myjp3"]
+[ext_resource type="Texture2D" uid="uid://c5653w0r64f0n" path="res://Resources/Boss/Boss_Idle.png" id="3_6xjhj"]
+[ext_resource type="Texture2D" uid="uid://cogn6836horv2" path="res://Resources/Boss/Boss_Attack1.png" id="3_nw7hd"]
+[ext_resource type="Texture2D" uid="uid://be8sch6i65lt4" path="res://Resources/Boss/Boss_Moving.png" id="4_jer15"]
+[ext_resource type="Texture2D" uid="uid://bpcvrf2na3i3x" path="res://Resources/Boss/Boss_Attack2.png" id="4_t3gys"]
+[ext_resource type="Texture2D" uid="uid://u2umynfro7j8" path="res://Resources/Boss/Boss_Anticipation1.png" id="5_3mg72"]
+[ext_resource type="Script" path="res://Source/Attack.gd" id="6_hposh"]
+[ext_resource type="Texture2D" uid="uid://nt3a7sapq0t2" path="res://Resources/Boss/Boss_Anticipation2.png" id="6_iwkfg"]
+[ext_resource type="Texture2D" uid="uid://c35ebiw3ef8iy" path="res://Resources/Boss/Boss_Anticipation3.png" id="7_5kn6v"]
+[ext_resource type="Texture2D" uid="uid://20soqu4a56yj" path="res://Resources/Boss/Boss_Cooldown.png" id="8_itfpg"]
+
+[sub_resource type="Resource" id="Resource_yqg0l"]
+script = ExtResource("2_6tytd")
+range = 100.0
+speedMulitplier = 0.0
+animation = &"Attack"
+priority = 0.0
+hurtboxName = NodePath("Attack")
+nextState = 0
+anticipate = true
+cooldown = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m6hb6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nw7hd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_t3gys")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_3mg72")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_iwkfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5kn6v")
+}],
+"loop": false,
+"name": &"AttackAnti",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_itfpg")
+}],
+"loop": true,
+"name": &"AttackCool",
+"speed": 0.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_myjp3")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6xjhj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_jer15")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_du2j2"]
+size = Vector2(202, 32)
+
+[node name="Enemy" instance=ExtResource("1_jvrxo")]
+Attacks = Array[ExtResource("2_6tytd")]([SubResource("Resource_yqg0l")])
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2(81, -79)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_m6hb6")
+animation = &"Attack"
+
+[node name="HitboxCollider" parent="EnemyHitbox" index="0"]
+position = Vector2(3, -17)
+
+[node name="Attack" type="Area2D" parent="." index="3"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("6_hposh")
+attackDamage = 1
+
+[node name="HurtboxCollider" type="CollisionShape2D" parent="Attack" index="0"]
+position = Vector2(101, 0)
+shape = SubResource("RectangleShape2D_du2j2")
+disabled = true

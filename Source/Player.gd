@@ -11,6 +11,8 @@ var currentHealth :float
 
 signal damageTaken(currentHealth)
 
+var lastHitTimer = 0;
+
 enum PlayerState{
 	Grounded,
 	Airborne,
@@ -19,6 +21,9 @@ enum PlayerState{
 	Stunned,
 	Prone,
 	Dead,
+
+	Anticipation,
+	Cooldown,
 }
 var playerState : PlayerState = PlayerState.Grounded
 
@@ -39,6 +44,9 @@ var attackType : AttackType = AttackType.Beans
 func _physics_process(delta):
 	var moveMultiplier: float = 0
 	
+	if (lastHitTimer > 0):
+		lastHitTimer -= delta;
+	
 	
 	var movement : Vector2 = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down")).normalized()
 	var attack1: bool = Input.is_action_pressed("attack1");
@@ -54,11 +62,12 @@ func _physics_process(delta):
 				setAnimation("moving")
 			else:
 				setAnimation("idle")
+				
 			if attack1:
 				playerState = PlayerState.Attacking
 				attackType = AttackType.Light
 			elif attack2:
-				playerState = PlayerState.Attacking
+				playerState = PlayerState.Anticipation
 				attackType = AttackType.Heavy
 			elif dodge:
 				playerState = PlayerState.Dodging
@@ -70,10 +79,21 @@ func _physics_process(delta):
 			elif jump:
 				playerState = PlayerState.Airborne
 			changeDirection(movement)
-		PlayerState.Airborne:
-			pass
+			
 		PlayerState.Dodging:
-			$Hitbox.monitorable = false
+			$Hitbox/HitboxCollider.disabled = true
+			moveMultiplier = 1.5
+			setAnimation("dodge")
+			
+			if animationEnded():
+				playerState = PlayerState.Grounded
+				$Hitbox/HitboxCollider.disabled = false
+			
+		PlayerState.Anticipation:
+			setAnimation("featherHeavyAnticipation")
+			if animationEnded():
+				playerState = PlayerState.Attacking;
+	
 		PlayerState.Attacking:
 			match attackType:
 				AttackType.Light:
@@ -96,16 +116,18 @@ func _physics_process(delta):
 				$HeavyFeatherHurtbox/HurtboxCollider.disabled = true
 				
 		PlayerState.Stunned:
-			pass
-		PlayerState.Prone:
-			pass
+			$Hitbox/HitboxCollider.disabled = true
+			moveMultiplier = 0
+			setAnimation("stunned")
+			
+			if animationEnded():
+				playerState = PlayerState.Grounded
+				$Hitbox/HitboxCollider.disabled = false
 	
 	if (movement.x or movement.y) and moveMultiplier:
 		velocity = movement * SPEED * moveMultiplier
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, SPEED * delta * momentumDampening)
-		
-	
 	
 	move_and_slide()
 
@@ -126,13 +148,13 @@ func changeDirection(movement):
 		isFlipped = shouldBeFlipped 
 
 func _on_hitbox_area_entered(area):
-	print("player has been hit uwu")
-	currentHealth -= area.attackDamage
-	damageTaken.emit(currentHealth)
-	print(currentHealth)
-	if currentHealth <= 0:
-		die()
+	if (lastHitTimer <= 0) :
+		currentHealth -= area.attackDamage
+		damageTaken.emit(currentHealth)
+		playerState = PlayerState.Stunned
+		lastHitTimer = 0.3
+		if currentHealth <= 0:
+			die()
 
 func die():
-	print("easy mode is now available")
 	playerState = PlayerState.Dead

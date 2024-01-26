@@ -9,6 +9,9 @@ class_name AttackInfo
 @export var hurtboxName : NodePath = ""
 @export var nextState : EnemyState = EnemyState.Grounded
 
+@export var anticipate : bool = false;
+@export var cooldown : bool = false;
+
 enum EnemyState{
 	Grounded,
 	Airborne,

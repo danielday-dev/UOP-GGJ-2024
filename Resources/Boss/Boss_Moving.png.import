@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfg535yn4u1pc"
-path="res://.godot/imported/Slime_Idle.png-a5900fc8b4de1cf7aed0175d8842ae0e.ctex"
+uid="uid://be8sch6i65lt4"
+path="res://.godot/imported/Boss_Moving.png-dfa34dabe0178cef8675872e984bbc4e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Slime/Slime_Idle.png"
-dest_files=["res://.godot/imported/Slime_Idle.png-a5900fc8b4de1cf7aed0175d8842ae0e.ctex"]
+source_file="res://Resources/Boss/Boss_Moving.png"
+dest_files=["res://.godot/imported/Boss_Moving.png-dfa34dabe0178cef8675872e984bbc4e.ctex"]
 
 [params]
 

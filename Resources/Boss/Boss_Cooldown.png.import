@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfg535yn4u1pc"
-path="res://.godot/imported/Slime_Idle.png-a5900fc8b4de1cf7aed0175d8842ae0e.ctex"
+uid="uid://20soqu4a56yj"
+path="res://.godot/imported/Boss_Cooldown.png-84c18c0e51e5988802149f811d6c3e26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Slime/Slime_Idle.png"
-dest_files=["res://.godot/imported/Slime_Idle.png-a5900fc8b4de1cf7aed0175d8842ae0e.ctex"]
+source_file="res://Resources/Boss/Boss_Cooldown.png"
+dest_files=["res://.godot/imported/Boss_Cooldown.png-84c18c0e51e5988802149f811d6c3e26.ctex"]
 
 [params]
 

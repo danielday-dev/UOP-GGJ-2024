@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfg535yn4u1pc"
-path="res://.godot/imported/Slime_Idle.png-a5900fc8b4de1cf7aed0175d8842ae0e.ctex"
+uid="uid://bpht1talu7t8e"
+path="res://.godot/imported/Player_HeavyAnticipation.png-c02c12e81e0a3da7533de4b935f87f82.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Slime/Slime_Idle.png"
-dest_files=["res://.godot/imported/Slime_Idle.png-a5900fc8b4de1cf7aed0175d8842ae0e.ctex"]
+source_file="res://Resources/Player/Player_HeavyAnticipation.png"
+dest_files=["res://.godot/imported/Player_HeavyAnticipation.png-c02c12e81e0a3da7533de4b935f87f82.ctex"]
 
 [params]
 

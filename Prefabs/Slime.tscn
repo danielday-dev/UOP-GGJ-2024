@@ -1,11 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://ookmlec53d3y"]
+[gd_scene load_steps=17 format=3 uid="uid://ookmlec53d3y"]
 
 [ext_resource type="PackedScene" uid="uid://ymj72rk301d8" path="res://Prefabs/Enemy.tscn" id="1_ox14j"]
 [ext_resource type="Script" path="res://Resources/AttackInfo.gd" id="2_vai6y"]
-[ext_resource type="Texture2D" uid="uid://dv0pmsp8e0a00" path="res://Resources/Slime/Slime_Idle.png" id="3_be4le"]
-[ext_resource type="Texture2D" uid="uid://blhv4t5ktldnv" path="res://Resources/Slime/Slime_Yum2.png" id="4_jm00p"]
-[ext_resource type="Texture2D" uid="uid://druut22w4jg2s" path="res://Resources/Slime/Slime_Yum.png" id="4_oe25i"]
+[ext_resource type="Texture2D" uid="uid://bfg535yn4u1pc" path="res://Resources/Slime/Slime_Idle.png" id="3_be4le"]
+[ext_resource type="Texture2D" uid="uid://e1sgpsclq3jl" path="res://Resources/Slime/Slime_Dead.png" id="3_leqq6"]
+[ext_resource type="Texture2D" uid="uid://c0c85lrgjpcu" path="res://Resources/Slime/Slime_Moving3.png" id="5_gx4ar"]
+[ext_resource type="Texture2D" uid="uid://bqcwa8sq3cesa" path="res://Resources/Slime/Slime_Moving2.png" id="6_aghbi"]
 [ext_resource type="Script" path="res://Source/Attack.gd" id="6_nja8o"]
+[ext_resource type="Texture2D" uid="uid://bidjr28rk43yi" path="res://Resources/Slime/Slime_Moving1.png" id="7_me81f"]
+[ext_resource type="Texture2D" uid="uid://1o4clpexhhdu" path="res://Resources/Slime/Slime_Attack1.png" id="8_3kvlw"]
+[ext_resource type="Texture2D" uid="uid://br1k6286wyb6i" path="res://Resources/Slime/Slime_Attack2.png" id="9_vmn41"]
+[ext_resource type="Texture2D" uid="uid://chr4antyni228" path="res://Resources/Slime/Slime_Anticipation.png" id="10_c7q6a"]
+[ext_resource type="Texture2D" uid="uid://brv08xjynorb3" path="res://Resources/Slime/Slime_Cooldown1.png" id="11_i4avj"]
+[ext_resource type="Texture2D" uid="uid://btujgha3bjlv7" path="res://Resources/Slime/Slime_Cooldown2.png" id="12_c2kcg"]
 
 [sub_resource type="Resource" id="Resource_mat2o"]
 script = ExtResource("2_vai6y")
@@ -15,9 +22,19 @@ animation = &"yom"
 priority = 0.0
 hurtboxName = NodePath("Yom")
 nextState = 0
+anticipate = true
+cooldown = false
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ag204"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_leqq6")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_be4le")
@@ -28,7 +45,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_be4le")
+"texture": ExtResource("5_gx4ar")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_aghbi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_me81f")
 }],
 "loop": true,
 "name": &"moving",
@@ -36,13 +59,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_oe25i")
+"texture": ExtResource("8_3kvlw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_jm00p")
+"texture": ExtResource("9_vmn41")
 }],
 "loop": false,
 "name": &"yom",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_c7q6a")
+}],
+"loop": false,
+"name": &"yomAnti",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_i4avj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_c2kcg")
+}],
+"loop": false,
+"name": &"yomCool",
 "speed": 5.0
 }]
 
@@ -53,9 +95,10 @@ size = Vector2(72, 20)
 Attacks = Array[ExtResource("2_vai6y")]([SubResource("Resource_mat2o")])
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2(32, -21)
+position = Vector2(73, -79)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_ag204")
+animation = &"yomAnti"
 
 [node name="EnemyHitbox" parent="." index="2"]
 scale = Vector2(2, 1)
