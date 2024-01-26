@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dinv8peksev2j"]
+[gd_scene load_steps=42 format=3 uid="uid://dinv8peksev2j"]
 
 [ext_resource type="PackedScene" uid="uid://w0vu14krjed8" path="res://Prefabs/Player.tscn" id="1_qlw6n"]
 [ext_resource type="Texture2D" uid="uid://c41p1o6vfwogu" path="res://Resources/Stage/Stage1.png" id="3_cet44"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://csp3txgtghwrj" path="res://Resources/Stage/Stage5Top.png" id="10_m8pxg"]
 [ext_resource type="Texture2D" uid="uid://dk7asgkg011pq" path="res://Resources/UI/UI-Movement.png" id="12_00emt"]
 [ext_resource type="Texture2D" uid="uid://5y24ji8hbnao" path="res://Resources/UI/UI-Other.png" id="13_qb67p"]
+[ext_resource type="PackedScene" uid="uid://d0qtdulijsgw1" path="res://Prefabs/RestartTimer.tscn" id="16_3wy6l"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p385"]
 distance = -0.999969
@@ -147,10 +148,6 @@ b = Vector2(-333, -294)
 z_as_relative = false
 position = Vector2(184, 288)
 floor_max_angle = 1.45211
-
-[node name="Slime" parent="." instance=ExtResource("5_6vdjg")]
-z_as_relative = false
-position = Vector2(489, 473)
 
 [node name="Environment" type="StaticBody2D" parent="."]
 
@@ -370,6 +367,9 @@ rotation = -1.5708
 shape = SubResource("WorldBoundaryShape2D_1p385")
 one_way_collision = true
 
+[node name="RestartTimer" parent="Camera" instance=ExtResource("16_3wy6l")]
+position = Vector2(-320, -180)
+
 [node name="Encounter1" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
 position = Vector2(601, 399)
 graveyard = NodePath("../Graveyard")
@@ -422,7 +422,6 @@ cameraXLimit = 2448.0
 
 [node name="Graveyard" type="Node2D" parent="."]
 
-[connection signal="died" from="Slime" to="Encounter1" method="enemyHasDied"]
 [connection signal="timeout" from="Camera/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
 [connection signal="died" from="Encounter1/Wave1/Slime" to="Encounter1" method="enemyHasDied"]
 [connection signal="died" from="Encounter1/Wave1/Slime2" to="Encounter1" method="enemyHasDied"]
