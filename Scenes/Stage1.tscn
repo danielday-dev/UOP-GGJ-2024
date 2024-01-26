@@ -562,19 +562,12 @@ cameraXLimit = 2448.0
 
 [node name="Graveyard" type="Node2D" parent="."]
 
-<<<<<<< HEAD
-[node name="Enemy" parent="." instance=ExtResource("19_v3jxj")]
-position = Vector2(395, 280)
-
-[connection signal="timeout" from="Camera/UserInterface/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
-=======
 [connection signal="beanUsed" from="Player" to="Camera/UserInterface/BeanBar" method="_update_bean"]
 [connection signal="damageTaken" from="Player" to="Camera/UserInterface/HealthBar" method="_update_health"]
 [connection signal="body_entered" from="Environment/WinGame" to="Player" method="_on_win_game_body_entered"]
 [connection signal="timeout" from="Camera/UserInterface/GIANTORANGEARROW/ArrowTimer" to="Camera/UserInterface/GIANTORANGEARROW" method="_on_arrow_timer_timeout"]
 [connection signal="encounterEnded" from="Encounter1" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterEnd"]
 [connection signal="encounterStarted" from="Encounter1" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterStart"]
->>>>>>> 48735ad52ec8489fac74d406d41e459f6e67fc1e
 [connection signal="limitCameraMovement" from="Encounter1" to="Camera" method="changeRightLimit"]
 [connection signal="encounterEnded" from="Encounter2" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterEnd"]
 [connection signal="encounterStarted" from="Encounter2" to="Camera/UserInterface/GIANTORANGEARROW" method="_encounterStart"]
