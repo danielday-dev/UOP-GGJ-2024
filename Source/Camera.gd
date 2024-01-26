@@ -18,3 +18,6 @@ func _physics_process(delta):
 		
 		var y = zoom.y * (screen_size.y / 2);
 		position.y = clamp(position.y, limit_top + y, limit_bottom - y);
+		
+func changeRightLimit(newLimit:float):
+	limit_right = max(newLimit, limit_right)

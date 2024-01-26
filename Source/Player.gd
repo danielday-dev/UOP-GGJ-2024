@@ -4,11 +4,9 @@ extends CharacterBody2D
 @export var SPEED: float = 300.0;
 @export var momentumDampening :float = 40;
 @export_category("Combat Stats")
-@export var maxHealth: float = 100;
-var currentHealth :float = maxHealth;
-@export var lightDamage : float = 20;
-@export var heavyDamage : float = 40;
-@export var beansHeal : float = 50;
+@export var maxHealth: float = 6;
+var currentHealth :float
+@export var beansHeal : float = 2;
 @export var numBeans : int = 3;
 
 enum PlayerState{
@@ -18,8 +16,12 @@ enum PlayerState{
 	Attacking,
 	Stunned,
 	Prone,
+	Dead,
 }
 var playerState : PlayerState = PlayerState.Grounded
+
+func _ready():
+	currentHealth = maxHealth;
 
 enum AttackType{
 	Light,
@@ -74,12 +76,12 @@ func _physics_process(delta):
 			match attackType:
 				AttackType.Light:
 					moveMultiplier = 0.6
-					$LightFeatherHurtbox.monitorable = true
+					$LightFeatherHurtbox/HurtboxCollider.disabled = false
 					setAnimation("featherLight")
 					
 				AttackType.Heavy:
 					moveMultiplier = 0.4
-					$HeavyFeatherHurtbox.monitorable = true
+					$HeavyFeatherHurtbox/HurtboxCollider.disabled = false
 					setAnimation("featherHeavy")
 					
 				AttackType.Beans:
@@ -88,8 +90,8 @@ func _physics_process(delta):
 					
 			if animationEnded():
 				playerState = PlayerState.Grounded
-				$LightFeatherHurtbox.monitorable = false
-				$HeavyFeatherHurtbox.monitorable = false
+				$LightFeatherHurtbox/HurtboxCollider.disabled = true
+				$HeavyFeatherHurtbox/HurtboxCollider.disabled = true
 				
 		PlayerState.Stunned:
 			pass
@@ -122,9 +124,12 @@ func changeDirection(movement):
 		isFlipped = shouldBeFlipped 
 
 func _on_hitbox_area_entered(area):
-	currentHealth -= area.damage
+	print("player has been hit uwu")
+	currentHealth -= area.attackDamage
+	print(currentHealth)
 	if currentHealth <= 0:
 		die()
 
 func die():
 	print("easy mode is now available")
+	playerState = PlayerState.Dead

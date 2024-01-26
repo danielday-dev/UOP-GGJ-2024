@@ -10,9 +10,10 @@ signal died(body)
 @export var Attacks : Array[AttackInfo]
 @export var minimumDistanceFromPlayer = 80
 @export_category("Combat Stats")
-@export var maxHealth: float = 100;
+@export var maxHealth: float = 3;
 
-var currentHealth :float = maxHealth;
+var children;
+var currentHealth :float;
 enum EnemyState{
 	Grounded,
 	Airborne,
@@ -29,17 +30,16 @@ var player : CharacterBody2D
 
 func _ready():
 	player = $/root/Main/Player
-	for attack in Attacks:
-		var attackNode = get_node(attack.hurtboxName)
-		attackNode.attackDamage = attack.damage
+	currentHealth = maxHealth;
+	children = get_children()
 
 func _physics_process(delta):
 	var movement : Vector2
 	
-	var distanceFromPlayer : float = ((position - player.position) * Vector2(1, 4)).length()
+	var distanceFromPlayer : float = ((global_position - player.global_position) * Vector2(1, 4)).length()
 	
 	if minimumDistanceFromPlayer <= distanceFromPlayer:
-		movement = position.direction_to(player.position)
+		movement = global_position.direction_to(player.global_position)
 	else:
 		movement = Vector2.ZERO
 	var moveMultiplier : float = 0
@@ -66,13 +66,13 @@ func _physics_process(delta):
 		EnemyState.Airborne:
 			pass
 		EnemyState.Attacking:
-			(get_node(activeAttack.hurtboxName) as Area2D).monitorable = true;
+			(get_node(activeAttack.hurtboxName) as Area2D).get_child(0).disabled = false;
 			moveMultiplier = activeAttack.speedMulitplier;
 			setAnimation(activeAttack.animation)
 			
 			if animationEnded():
 				enemyState = activeAttack.nextState as EnemyState;
-				(get_node(activeAttack.hurtboxName) as Area2D).monitorable = false
+				(get_node(activeAttack.hurtboxName) as Area2D).get_child(0).disabled = true
 				
 		EnemyState.Stunned:
 			pass
@@ -105,11 +105,18 @@ func changeDirection(movement):
 		isFlipped = shouldBeFlipped
 
 func die():
-	died.emit()
+	print("bazoogal the enemy died")
+	died.emit(self)
 	enemyState = EnemyState.Dead
-
+	print("this is the part where he (the animation) kills you")
+	for child in children:
+		if child is Area2D:
+			child.get_child(0).set_deferred("disabled", true)
+	set_physics_process(false)
+	set_process(false)
 
 func _on_enemy_hitbox_area_entered(area):
+	print("steve the slime has had his ass slapped")
 	currentHealth -= area.attackDamage
 	if currentHealth <= 0:
 		die()

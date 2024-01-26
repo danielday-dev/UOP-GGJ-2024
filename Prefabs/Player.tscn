@@ -81,32 +81,33 @@ animation = &"idle"
 shape = SubResource("CapsuleShape2D_65r7v")
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 0
+collision_layer = 0
+collision_mask = 32
 
 [node name="HitboxCollider" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 0.625)
 shape = SubResource("RectangleShape2D_04agm")
 
 [node name="LightFeatherHurtbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 128
-monitorable = false
+collision_layer = 128
+collision_mask = 0
 script = ExtResource("7_npm28")
 attackDamage = 1
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="LightFeatherHurtbox"]
 position = Vector2(57, 1)
 shape = SubResource("RectangleShape2D_5oplk")
+disabled = true
 
 [node name="HeavyFeatherHurtbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 128
-monitorable = false
+collision_layer = 128
+collision_mask = 0
 script = ExtResource("7_npm28")
+attackDamage = 1
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="HeavyFeatherHurtbox"]
 position = Vector2(40.5, 2.5)
 shape = SubResource("RectangleShape2D_8fcfc")
+disabled = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1,26 +1,16 @@
 [gd_scene load_steps=6 format=3 uid="uid://ymj72rk301d8"]
 
 [ext_resource type="Script" path="res://Source/Enemy.gd" id="1_clj3o"]
-[ext_resource type="Texture2D" uid="uid://bt6u3q54udja6" path="res://Resources/DefaultTexture.png" id="1_oyk4n"]
+[ext_resource type="Texture2D" uid="uid://bt6u3q54udja6" path="res://Resources/DefaultTexture.png" id="2_iakpy"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_peagi"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_72ipd"]
 animations = [{
-"frames": [],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"lightAttack",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_oyk4n")
+"texture": ExtResource("2_iakpy")
 }],
 "loop": true,
-"name": &"moving",
+"name": &"idle",
 "speed": 5.0
 }]
 
@@ -37,15 +27,15 @@ script = ExtResource("1_clj3o")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_peagi")
+sprite_frames = SubResource("SpriteFrames_72ipd")
 animation = &"idle"
 
 [node name="Collider_Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_2ac44")
 
 [node name="EnemyHitbox" type="Area2D" parent="."]
-collision_layer = 128
-collision_mask = 0
+collision_layer = 0
+collision_mask = 128
 
 [node name="HitboxCollider" type="CollisionShape2D" parent="EnemyHitbox"]
 position = Vector2(0, 1)

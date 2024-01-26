@@ -13,7 +13,6 @@ range = 100.0
 speedMulitplier = 0.2
 animation = &"yom"
 priority = 0.0
-damage = 1.0
 hurtboxName = NodePath("Yom")
 nextState = 0
 
@@ -57,7 +56,6 @@ Attacks = Array[ExtResource("2_vai6y")]([SubResource("Resource_mat2o")])
 position = Vector2(32, -21)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_ag204")
-animation = &"yom"
 
 [node name="EnemyHitbox" parent="." index="2"]
 scale = Vector2(2, 1)
@@ -66,11 +64,12 @@ scale = Vector2(2, 1)
 position = Vector2(0, 0)
 
 [node name="Yom" type="Area2D" parent="." index="3"]
-collision_layer = 0
-collision_mask = 32
-monitorable = false
+collision_layer = 32
+collision_mask = 0
 script = ExtResource("6_nja8o")
+attackDamage = 1
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="Yom" index="0"]
 position = Vector2(36, 0)
 shape = SubResource("RectangleShape2D_lv4v1")
+disabled = true

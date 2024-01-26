@@ -148,10 +148,6 @@ z_as_relative = false
 position = Vector2(184, 288)
 floor_max_angle = 1.45211
 
-[node name="Slime" parent="." instance=ExtResource("5_6vdjg")]
-z_as_relative = false
-position = Vector2(489, 473)
-
 [node name="Environment" type="StaticBody2D" parent="."]
 
 [node name="Upper Boundary" type="CollisionShape2D" parent="Environment"]
@@ -379,19 +375,19 @@ cameraXLimit = 1215.9
 position = Vector2(5, -126)
 
 [node name="Slime" parent="Encounter1/Wave1" instance=ExtResource("5_6vdjg")]
-position = Vector2(-60, 81)
+position = Vector2(-59, 101)
 
 [node name="Slime2" parent="Encounter1/Wave1" instance=ExtResource("5_6vdjg")]
-position = Vector2(84, 63)
+position = Vector2(63, 79)
 
 [node name="Wave2" type="Node2D" parent="Encounter1"]
 position = Vector2(-4, -167)
 
 [node name="Slime" parent="Encounter1/Wave2" instance=ExtResource("5_6vdjg")]
-position = Vector2(-69, 40)
+position = Vector2(-61, 57)
 
 [node name="Slime2" parent="Encounter1/Wave2" instance=ExtResource("5_6vdjg")]
-position = Vector2(100, 42)
+position = Vector2(46, 43)
 
 [node name="Encounter2" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("5_uywg0")]
 position = Vector2(1060, 266)
@@ -422,9 +418,5 @@ cameraXLimit = 2448.0
 
 [node name="Graveyard" type="Node2D" parent="."]
 
-[connection signal="died" from="Slime" to="Encounter1" method="enemyHasDied"]
 [connection signal="timeout" from="Camera/GIANTORANGEARROW/ArrowTimer" to="Camera" method="_on_arrow_timer_timeout"]
-[connection signal="died" from="Encounter1/Wave1/Slime" to="Encounter1" method="enemyHasDied"]
-[connection signal="died" from="Encounter1/Wave1/Slime2" to="Encounter1" method="enemyHasDied"]
-[connection signal="died" from="Encounter1/Wave2/Slime" to="Encounter1" method="enemyHasDied"]
-[connection signal="died" from="Encounter1/Wave2/Slime2" to="Encounter1" method="enemyHasDied"]
+[connection signal="limitCameraMovement" from="Encounter1" to="Camera" method="changeRightLimit"]

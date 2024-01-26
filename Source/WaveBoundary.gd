@@ -1,8 +1,5 @@
 extends Area2D
 
-
-
-@export var cameraClampLocationX : float = 0
 @export var graveyard : Node2D
 
 @export var cameraXLimit : float = 0
@@ -18,8 +15,8 @@ func _ready():
 	for child in children:
 		if !(child is Timer) and !(child is CollisionShape2D):
 			child.hide()
-			child.set_process(false)
 			for kid in child.get_children():
+				kid.set_physics_process(false)
 				kid.died.connect(enemyHasDied)
 				
 
@@ -28,19 +25,21 @@ func _process(delta):
 	pass
 
 func _on_body_entered(body):
-	limitCameraMovement.emit()
+	limitCameraMovement.emit(cameraXLimit)
 	var tim = get_child(1)
 	tim.start()
+	print("nice body (im picking you up)")
 
 func _on_mob_spawn_timer_timeout():
 	for child in children:
 		if !(child is Timer) and !child.visible:
-			child.set_process(true)
+			for kid in child.get_children():
+				kid.set_physics_process(true)
 			child.show()
 			break;
 
 func playerHasDefeatedEnemies():
-	limitCameraMovement.emit()
+	limitCameraMovement.emit(cameraXLimit)
 			
 func checkAllWavesClear():
 	for child in children:
@@ -49,5 +48,5 @@ func checkAllWavesClear():
 	playerHasDefeatedEnemies()
 
 func enemyHasDied(body):
-	body.reparent(graveyard)
+	body.call_deferred("reparent", graveyard)
 	checkAllWavesClear()
